@@ -67,7 +67,7 @@ Saving something allows you to refer to it later, or modify it in the future. Wh
 R has all the features of a calculator and can perform advanced mathematical operations through functions. Here is a list of all the mathematical operators and their symbols:
 `  + addition, - subtraction, * multiplication, / division, ^ exponent `
 These are some relevant mathematical functions in base R:
-` log() logarithm, log20() log-base-10, cos() cosine, sin() sine`
+` log() log base 10, cos() cosine, sin() sine`
 The `round()` function is useful for rounding numbers to integers. If you specify the number of digits with the `digits = ` parameters you can choose the length of your numbers. If you are trying to do something mathematical there is almost certainly already a function for it. Don't be afraid to look it up. 
 
 This code chunk is an example of how to save each data type and demonstrates the syntax for basic mathematical operations:
@@ -111,9 +111,9 @@ Objects are a collection of any of these value types or another data structure. 
 The logical operators are useful for comparing boolean and numeric variables. These operators can be used in conjunction with loops and if/else statements discussed in subsequent sections. 
 
 ### Boolean Operators
-These logical operators can be used to compare boolean values (`TRUE` or `False`):
+These logical operators can be used to compare boolean values (`TRUE` or `FALSE`):
 
-* and `&`
+* `&` - and
   + both sides of and must be true for and to return true, otherwise it returns false
   
 ```{r}
@@ -122,7 +122,7 @@ TRUE & TRUE
 FALSE & FALSE
 ```
   
-* or `|`
+* `|` - or
   + if either side is true, this operator returns true
 
 ```{r}
@@ -131,9 +131,10 @@ TRUE | TRUE
 FALSE | FALSE
 ```
 
-* equal `==`
+* `==` - equal
   + returns true if the variables are the same
   + can also be used with numeric variables as well as boolean
+  + note in a logical expression there must be two equal signs, otherwise there will be an error
 
 ```{r}
 TRUE == TRUE
@@ -190,7 +191,7 @@ b <= a
 a <= a
 ```
 
-`NA` represents a missing value and does not have a type like the examples above. We will discuss errors like this later. 
+`NA` represents a missing value and does not have a type like the examples above. This is very useful for representing missing values in a way that R recognizes, but can lead to errors if used with certain functions. 
 
 ## If and Else Statements
 

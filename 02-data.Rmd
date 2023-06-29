@@ -4,30 +4,27 @@
 library(here)
 ```
 
-
-This chapter deals explains how to deal with different types of data within R, as well as how to manipulate and save that data. When we are dealing with data we will be using the object of a data frame to save the data within the temporary memory of R itself (shown in the environment). For this chapter, the tidyverse contains the set of packages we will use. The installation and calling of this package is shown in the chunk below:
+This chapter explains how to deal with different types of data within R, as well as how to clean, manipulate, and save data. When we are dealing with data we will be using the object of a data frame to save the data within the temporary memory of R itself (shown in the environment). For this chapter, the tidyverse contains the set of packages we will use. The installation and calling of this package is demonstrated in the chunk below:
 
 ```{r}
 # install.packages("tidyverse)
 library(tidyverse)
 ```
-The output from calling the tidyverse shows all of the different packages it loads into R at once. These packages are meant to work together for data analysis, wrangling, and visualization. 
-
+The output from calling the tidyverse shows all of the different packages it loads into R at once and their most recent version. The core packages comprise a powerful suite of tools for importing, wrangling, analyzing, and visualizing data. 
 
 ## Data Frames
 
-Within R itself, a data frame can be created in two different ways: using the `tibble()` or `tribble()` functions. An example of how to use each is given in the code chunk below:
+Within R itself, a data frame can be created in two different ways: using the `tibble()` or `tribble()` functions. Both functions do exactly the same thing using different syntax. The `tibble()` function uses the format `row = c(), row2 = c()`. The `tribble()` function uses a vertical format, with `~` denoting the row names. An example of how to the `tibble()` function is given in the code chunk below:
 
 ```{r}
 # the tibble function joins either manually set or referenced vectors of the same length into a data frame 
 (data_frame <- tibble(row = c(1,2,3,4,5,6,7,8,9,10), # row_name = vector(length 10)
                      color = c('red', 'blue', 'yellow', 'green', 'purple', 'orange', 'magenta', 'red', 'purple', 'orange'), 
-                     category = c('warm', 'cold', 'warm', 'cold', 'cold', 'warm', 'warm', 'warm', 'cold', 'warm'))) 
+                     category = c('warm', 'cold', 'warm', 'cold', 'cold', 'warm', 'warm', 'warm', 'cold', 'warm'),
+                     boolean = c(TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE))) 
 ```
 
-## Data Types
-
-Underneath the row name in the `<>` is the data type of the column. `<dbl>` refers to double and `<chr>` refers to characters. The vectors must be the same length for this to work. Each row here has a length of 10. The function is surrounded in parentheses so the output prints.
+Underneath the row name in `<>` is the data type of the column. `<dbl>` refers to double, `<chr>` refers to character, and `<lgl>` refers to logical. `<dbl>` is the standard data type for numbers and `<chr>` is the standard data type for text in R. `<lgl>` refers to a TRUE or FALSE value, usually called a Boolean in computer science. `<int>`, referring to integers, is another common data type. The rows must be the same length for the `tibble()` or `tribble()` function to run. Each row here has a length of 10. The function is surrounded in parentheses so the output prints. The code chunk below demonstrates how to use the `tribble()` function. 
 
 ```{r}
 # the tribble identifies the column name on the first line with the ~ symbol
@@ -36,23 +33,49 @@ Underneath the row name in the `<>` is the data type of the column. `<dbl>` refe
                        3,4,
                        5,6,
                        7,8 )) # this provides an alternative method to hand entering these 
-# most of the time this should not be necessary for entering actual data
-# this can be useful for making summary tables for output in final work
 ```
 
-It is important to make sure each column is the desired data type. If you are trying to use functions that 
+It is important to make sure each column is the intended data type. Functions (especially mathematical ones) require often require a certain data type as an input.
 
 ### Date Time Objects
 
-There is a special type for times available through the `lubridate` package. This package is automatically included in the tidyverse. The code chunk below demonstrates how to use the `make_datetime()` function. Using this data type ensures that graphs over time are produced properly using ggplot2. 
+Include in this section more information on how to deal with time series data and parse time series character strings
+
+There is a special data type for dates and times available through the `lubridate` package. This package is automatically included in the tidyverse. There are three different data types associated with dates/times: a date data type signifying the day, month, and year (`<date>`); a time data type signifying the time within a day (`<time>`); and a date time which includes both (`<dttm>`).  The code chunk below demonstrates how to use the `make_datetime()` function to create time objects. Using this data type ensures that graphs over time are produced properly using ggplot2. The beauty of the tidyverse is that all these packages build off each other. 
 
 ```{r}
 make_datetime(year = 2020, month = 11, day = 25)
 ```
 
+Often, one of the hardest parts of working with a new data set is correctly changing however they keep the date/time into a date time object. The lubridate package is able to create these objects with a variety of input formats, making this process much easier. The code chunk below demonstrates different methods of creating `<dttm>` objects. 
+
+```{r}
+ymd('2017-01-02') #year month day function creates a date object
+mdy("01/02/2017", tz = "UTC") # month day year
+# adding a timezone makes this a date time object instead
+dmy_hms("2 Jan 2017 10:00:00 PM") #year month day _ hour minute second
+# these functions can also read full text and abbreviations
+```
+
+One of the other really useful parts of lubridate date/time objects is the ability to refer to different components of a date time object. If you have a complete date time object, `year()` returns the year, `month()` returns the month, `mday()` returns the day of the month, `wday()` returns the day of the week, and the same for `hour()`, `minute()`, and `second()`.
+
+```{r}
+(today <- ymd_hms(now()))
+year(today)
+month(today)
+mday(today)
+wday(today)
+wday(today, label=TRUE) # this returns a factor ordering the days of the week properly
+hour(today)
+minute(today)
+second(today)
+```
+
+For more in depth information and examples concerning lubridate refer to [this chapter](https://r4ds.had.co.nz/dates-and-times.html) of R for Data Science. [@r4ds] Additionally, looking at the documentation of the package is always helpful. 
+
 ### Factors
 
-Factors are a specialized data type meant to deal with categorical variables. Factors are available through the `forecats` package which is apart of the tidyverse. This format best applies to a character variable that has a specified order, such as months in a year. To convert a create a factor you must use the `factor()` function. The code chunk below shows an example of converting a character vector to a factor using months. The difference can be seen when the factor and character vectors are sorted. Factors are most useful within data frames. They give R a roadmap of how to value character variables properly, making graphing, filtering, and general analysis easier.
+Factors are a specialized data type meant to deal with categorical variables. Factors are available through the `forcats` package which is apart of the tidyverse. This format best applies to a character variable that has a specified order, such as months in a year. To convert a create a factor you must use the `factor()` function. The code chunk below shows an example of converting a character vector to a factor using months. The difference can be seen when the factor and character vectors are sorted. Factors are most useful within data frames. They give R a roadmap of how to value character variables properly, making graphing, filtering, and general analysis easier.
 
 ```{r}
 mon <- c("Mar", "Apr", "Dec", "Feb", "Nov", "Jun", "Aug", "Jan", "Oct", "May", "Jul", "Sep")
@@ -62,6 +85,7 @@ sort(mon) # this output does not have any ordering
 sort(factor) # this output has the ordering for the months saved in the levels
 ```
 
+For a more in-depth explanation of factors, refer to [this chapter](https://r4ds.had.co.nz/factors.html) of R for Data Science. [@r4ds]
 
 ## Importing Data
 
@@ -71,22 +95,22 @@ Importing data is an important skill. Data comes in a variety of formats which y
 Most often data you encounter will be available in the .csv format (comma-separated-values). The `readr` package in the tidyverse provides a very useful function, `read_csv()` for reading .csv files. An example of how to use the `read_csv()` function is given in the chunk below:
 
 ```{r}
-data <- read_csv(here("sample.csv"))
+(data <- read_csv(here("sample.csv")))
 # this reads a csv detailing monthly liquor sales data
 ```
 
-If the .csv file has blank lines at the beginning of the file you can use the `skip = ` parameter to skip lines of the save before it starts to read it. This is often necessary to skip white space at the top and ensure the .csv file correctly reads into a data frame. 
-
 ### Microsoft Excel Files
 
-Excel has changed the way they save their files over time leading to a variety of way that excel files can be read. One important thing to note is excel files can always be saved as .csv files and read that way. If you want to directly read the excel file, the `readxl` package offers the ability to read an excel file directly into a data frame through the `read_excel(file_name)` function. The code chunk below shows an example of how to do this. Note: to just use the file name the file must be in the project folder. Otherwise, you need the complete file path or to change the working directory to the folder with the file. If the excel file has multiple sheets, the `sheet =` parameter allows you to select the sheet by setting it equal to the name of the sheet.  
+Excel has changed the way they save their files over time leading to a variety of way that excel files can be read. One important thing to note is excel files can always be saved as .csv files and read that way. If you want to directly read the excel file, the `readxl` package offers the ability to read an excel file directly into a data frame through the `read_excel(file_name)` function. The code chunk below shows an example of how to do this. Note: to just use the file name the file must be in the project folder. Otherwise, you need to change the working directory to the folder with the file or to use the complete file path.
 
 ```{r}
 library(readxl)
 read_excel("sample.xlsx")
 ```
 
-Excel has a very useful feature where they can read tables from pictures or screenshots of textbooks. This is present in the data tab of the top bar of excel and identified in the screenshot below. Simply select the file of a picture of the table and excel will try to import it. It isn't perfect but often get most of it right. Always check that it is correct when using this, it still saves a ton of time. 
+If the excel file has multiple sheets, the `sheet =` parameter allows you to select the sheet by setting it equal to the name of the sheet. If the excel file has blank lines at the beginning of the file you can use the `skip = ` parameter to skip lines of the save before it starts to read it. This is often necessary to skip white space at the top and ensure the .csv file correctly reads into a data frame. 
+
+Excel has a very useful feature where they can read tables from pictures or screenshots of textbooks. This is present in the data tab of the top bar of excel and identified in the screenshot below. Simply select the file of a picture of the table and excel will try to import it. It isn't perfect but often get most of it right. Always check the data for errors when using this, it still saves a ton of time. 
 
 ![Excel Picture to Table Tool](figures/data_ss.png)
 
@@ -100,15 +124,13 @@ Almost any data you encounter will be in either one of these three formats or ab
 
 ## Cleaning Data and the Tidyverse
 
-What is clean data? For data to be clean there must be a clear pattern of organization to how the data is stored. This concept is also commonly referred to as tidy data. For this subsection make sure to have install and called the `tidyverse` package, as it contains tidyr tools used to manipulate data frames. 
-
-There are three general rules for making a data set tidy:
+What is clean data? For data to be clean there must be a clear pattern of organization to how the data is stored. This concept is also commonly referred to as tidy data. There are three general rules for making a data set tidy:
 
 * Each variable must have its own column
 * Each observation must have its own row
 * Each value must have its own cell
 
-Table 1, shown in the code chunk below, is an example of a tidy data set. Each observation (pertaining to a country and a year) has its own row. Additionally, each variable has its own column. This table is  included in the tidyverse as an example.[@r4ds this] 
+Table 1, shown in the code chunk below, is an example of a tidy data set. Each observation (pertaining to a country and a year) has its own row. Additionally, each variable has its own column. This table is included with the tidyverse as an example and used in R for Data Science.[@r4ds] 
 
 ```{r}
 table1
@@ -122,21 +144,20 @@ sample_table <- tibble(type = c("population", "cases", "population", "cases", "p
                 )
 ```
 
-Often, data when you receive it will not be in this format. The first step after successfully importing data is to clean it. Luckily, the tidyverse offers functions that allow you to rearrange the data into a format better suited for analysis and plotting. I will go through several examples of different common problems with data, and what functions are best to fix them.
+Often, data when you receive it will not be in this format. The first step after successfully importing data is to clean it. Luckily, the tidyverse offers functions that allow you to rearrange data frames into a format better suited for analysis and plotting. I will go through several examples of different common problems with data, and what functions are best to fix them.
 
 ### Pivoting Data
 
-First, we will discuss the two functions used for pivoting data. The code chunk below shows a sample data frame that has multiple issues, which are able to be corrected through pivoting. Instead of having a column for each variable, the variable type indicates the variable. Columns 3 and 4, which are both doubles (numeric data type), pertain to the year of the value. These are examples of common problems with data. 
+First, we will discuss the two functions used for pivoting data. The code chunk below shows a sample data frame that has multiple issues which are able to be corrected through pivoting. Instead of having a column for each variable, the variable "type" indicates the variable. Columns 3 and 4, which both contain doubles, pertain to the year of the value. These are examples of common problems with data organization. 
 
 ```{r}
 sample_table
 ```
 
-
-These two functions in dplyr are each geared to solving one of these problems: 
+These two functions in dplyr are each solve one of these problems: 
 
 * `pivot_longer()`
-  + this adds rows making the data frame longer
+  + this adds rows making the data frame longer 
   + this corrects the issue with the columns pertaining to the year of the corresponding value
   + parameters: `pivot_longer(data, cols, names_to = , values_to = )`
     + data: data frame to pivot
@@ -154,28 +175,30 @@ These two functions in dplyr are each geared to solving one of these problems:
   + this corrects the issue that each variable does not have its own column
   + parameters: `pivot_wider(data, names from = , values_from = )`
     + data: data frame to pivot
-    + names_from: column whos values are the names of the new columns 
-    + values_from: column whos values are the values of the new columns
+    + names_from: column whose values are the names of the new columns 
+    + values_from: column whose values are the values of the new columns
 
 ```{r}
 # this pivots the data frame after the longer pivot above
 pivot_wider(longer_table, names_from = type, values_from = value )
-# note without an assignment operator this is not saved
+# note without an assignment operator (<-) this is not saved
 ```
+
+For more information and examples about pivoting refer to the [Stanford Data Wrangling book](https://dcl-wrangle.stanford.edu/pivot-basic.html) and the R for Data Science Chapter on [tidy data](https://r4ds.had.co.nz/tidy-data.html). [@stanford] [@r4ds]
 
 ### Creating New Variables
 
 Often in working with data you will want to create a new variable. These can be numeric variables that combine values already present in the data or categorical variables that differentiate the values in some way. 
 
-This first example in the code chunk below demonstrates how to make a new numeric variable using two existing numeric variables. This creates a new row that is the number of cases divided by the total population that year. 
+This first example in the code chunk below demonstrates how to make a new numeric variable using two existing numeric variables. This creates a new column that is the number of cases divided by the total population that year. The second new variable, `ln_pop`, demonstrates how to apply a function to a numeric variable to create a new variable. In this case the function is the natural log. 
 
 ```{r}
-mutate(table1, cases_per_cap = cases / population)
+mutate(table1, cases_per_cap = cases / population, ln_pop = log(population))
 # on the left side of the equal sign is the name of the new variables
 # on the right side is the new variable
 ```
 
-You can use vectors, but must be careful when doing so. The vector must have the same length as the data frame has rows. Additionally, it is important to note that the first element will belong to the observation of the first row. It is important to make sure that you are assigning values to the correct observation, otherwise your data will become corrupted invalidating any work past this point. The code chunk below shows an example of using a vector to create a new column in table 1. 
+You can use vectors to create new variables, but must be careful when doing so. The vector must be the same length as the data frame (the same number of rows). Additionally, it is important to note that the first element will belong to the observation of the first row. It is important to make sure that you are assigning values to the correct observation, otherwise your data will become corrupted invalidating any work past this point. The code chunk below shows an example of using a vector to create a new variable in table 1. 
 
 ```{r}
 new_var <- c(0.5, 2.1, 3.4, 0.3, 0.78, 1.64) # this does not correspond to anything
@@ -183,7 +206,7 @@ mutate(table1, value = new_var) # the new var has a length of 6 so this works
 # any other length would cause an error
 ```
 
-This next examples demonstrates how to use the `case_when()` function. The `case_when()` function is very useful when creating a new categorical variable based on other already existing variables. The code chunk below demonstrates the correct syntax. 
+This next examples demonstrates how to use the `case_when()` function. The `case_when()` function is very useful when creating a new categorical variable based on other already existing variables. This function does not have any explicit parameters. Instead, there can be any number of logical statements (e.g. cases / population < 0.0001), the `~`, and the corresponding value if the statement evaluates as true. The code chunk below demonstrates the correct syntax.
 
 ```{r}
 (new_table <- mutate(table1, cases_per_cap = case_when(cases / population < 0.0001 ~ "low",
@@ -191,15 +214,27 @@ This next examples demonstrates how to use the `case_when()` function. The `case
                                      cases / population >= 0.0003 ~ "high")))
 ```
 
-This creates a low, medium, or high categorical variable indicated the number of cases per capita. This creates the variable in the character data type. To make this into a factor you can overwrite the variable using mutate with the function to turn it into a factor. This is demonstrated in the code chunk below. 
+This creates a variable that indicates the level of cases per capita. This creates the variable in the character data type. This variable is perfect for using the factor data type, as it has inherent ordered levels. The code chunk below demonstrates how to turn this variable into a factor. When using mutate, if you set something equal to a variable name you already have, it will overwrite that variable. 
 
 ```{r}
 mutate(new_table, cases_per_cap = factor(cases_per_cap, levels = c("low", "medium", "high")))
 ```
 
+### Selecting Columns
+
+In some cases, a data frame will have more variables than you need for your analysis. The `select(data, cols)` function allows you to choose rows and put them in a new data frame. The data parameter is the data frame to select columns from, and the cols is the name of the columns to select. The code chunk below demonstrates how to use the select function using Table 1 as an example. This can be chained with other data wrangling functions using the piping operator discussed in the next section. This is very useful when cleaning data as it allows you to easily discard data you do not need. You should always keep an original copy of the data as you received it in the case that you need to go back, but you should save a modified data frame with only the variables you need for analysis.
+
+```{r}
+select(table1, country, year) # this returns only the country and year columns
+
+# the everything function allows you to move the selected columns to the front 
+# of the data frame, keeping all columns
+select(table1, year, population, everything())
+```
+
 ### Renaming Variables and Piping 
 
-It is very important to make sure the names of the columns comply with the conventions of coding and clearly indicate what it is. Most data sets have a code book that lists each variable and what it represents, but these names are often not conducive to identifying the variable during analysis. To rename the columns in a data frame use the `rename()` function available with the tidyverse. The code chunk below demonstrates this using the data frame longer table, saved after the first pivoting exercise above. 
+It is very important to make sure the names of the columns comply with the conventions of coding and clearly indicate the variable. Most data sets have a code book that lists each variable and what it represents, but these names are often do not effectively identify the variable without having to refer to the code book. To rename the columns in a data frame use the `rename()` function available with the tidyverse. The code chunk below demonstrates this using the data frame longer table, saved after the first pivoting exercise above. 
 
 ```{r}
 rename(longer_table, numbers = value)
@@ -215,7 +250,7 @@ longer_table |>  # the extra line is unnecessary but improves the readability of
   rename(numbers = value, time = year)
 ```
 
-The piping operator allows me to use the output of `longer_table` and use it as the data parameter for the next function, in this case the `rename()` function. The most useful part of the piping operator is that it allows you to chain multiple functions together, each accepting as the data parameter the output from the last code before the last piping operator. The code chunk below demonstrates this by both pivoting and renaming `longer_table` using the piping operator. From this point forward, I will be using examples of piping when demonstrating new concepts. 
+The piping operator allows me to use the output of `longer_table` as the data parameter for the next function, in this case the `rename()` function. The most useful part of the piping operator is that it allows you to chain multiple functions together, each accepting as the data parameter the output from the last code before the last piping operator. The code chunk below demonstrates this by both pivoting and renaming `longer_table` using the piping operator. From this point forward, I will be using examples of piping when demonstrating new concepts. 
 
 ```{r}
 longer_table |>
@@ -225,7 +260,7 @@ longer_table |>
 
 ### Filtering Data
 
-Filtering allows you to look at the subset of a data frame. It keeps rows that match a conditional statement (logical expression covered in Chapter 1). This can be done according to a single or multiple conditions. This is done through the `filter(data, conditions)` function in the tidyverse. The code chunk below filters Table 1, restricting it to only data pertaining to Afghanistan. This shows how it can be very useful when dealing with categorical variables. 
+Filtering allows you to look at the subset of a data frame. It keeps rows that match a conditional statement (logical expression covered in Chapter 1). This can be done according to a single or multiple conditions. The syntax is as follows: `filter(data, conditions)`. The code chunk below filters Table 1, restricting it to only data pertaining to Afghanistan. This demonstrates how it can be very useful when dealing with categorical variables. 
 
 ```{r}
 table1 |>
@@ -233,30 +268,124 @@ table1 |>
 # the match on the right side of the equals sign must be the same data type as the column referenced
 ```
 
-It is also very useful when dealing with numeric variables as well. The code chunk below demonstrates simple and more complex numeric filters. The conditional statements can be combine using `&` (and) and `|` (or) operators. While this simple example restricts the data frame to only one row, this function is much more powerful in large and aggregated data sets. 
+It is also very useful when dealing with numeric variables as well. The code chunk below demonstrates simple and more complex numeric filters. The conditional statements can be combined using `&` (and) and `|` (or) operators. While this simple example restricts the data frame to only one row, this function is much more powerful in large data sets. 
 
 ```{r}
 table1 |> filter(population > 20000000) 
 # only keeps rows where population is greater than twenty million
-
 table1 |> filter(population < 20000000 | population > 1000000000)
 # when using the | operator, if one or both of the conditionals evaluates to true,
 # then the whole statement evaluates as true and the row is kept
-
 table1 |> filter(country == "Afghanistan" & year == 2000)
 # when using the & operator, both conditionals must be true for the whole
 # statement to evaluate as true and the row is kept
 ```
 
-### Grouping and Summarizing Data
+The `filter()` function is wonderful for selecting subsets of data, but it does not allow you to reorder the rows according to a variable. For this we use the `arrange()` function. The basic syntax for arrange is shown in the code chunk below. The first example shows the default ascending order the `arrange()` function uses.  The second example shows how to get it to use descending order by wrapping the column in the `desc()` function. The third example shows what happens when multiple variables are included in the `arrange()` function. The function arranges according to the first variable and then without violating the arrangement of the first variable arranges according to the second, and so on. The final two examples show how arrange deals with characters. The most important difference between `filter()` and `arrange()` is that `filter()` loses observations when `arrange()` keeps all observations but just reorders them. 
 
-The summary function allows the creation of summary statistics of the data. These tables are vitally important in analysis and can be crucial elements of analysis that back up claims in written submitted work. 
+```{r}
+table1 |> arrange(year) # by default it arranges year in ascending order
+table1 |> arrange(desc(year)) # arranges year in descending order
+table1 |> arrange(year, desc(population)) 
+# first arranges by year (ascending) and then by population (descending)
+table1 |> arrange(country) # arranges in alphabetical order
+table1 |> arrange(desc(country)) # arranges in reverse alphabetical order
+```
 
+### Summarizing Data
 
+The summary function allows the creation of summary statistics of the data. These tables are vitally important in analysis and can be crucial elements of analysis that back up claims in written submitted work. The function can be called either through `summarize()` or `summarise()`. Both do the exact same thing. The code chunk below shows an example of the summary function. 
 
-### Joining Data Sets
+```{r}
+table1 |> summarize(pop_mean = mean(population), mean(cases), count = n())
+# count shows the number of rows using the n() function
+```
 
-There can be cases when two different data sets contain variables you want to analyze in context with each other. This requires that you merge the data using a key variable, a variable or collection of variables that are the same between both data sets and uniquely identify observations.
+### Grouping Data
+
+When dealing with data that has categorical variables, it makes sense to analyze the data in context of each group. This can be done through the `group_by()` function. `group_by()` on its own does not have any affect. It must be combined with another function. Usually it is best used in on a categorical variable. The code chunk below demonstrates how it can be applied to countries in table1. When used in conjunction, it groups all observations with the same country and gives stats for that instead of the data in totality as shown above. 
+
+```{r}
+table1 |>
+  group_by(country) |>
+  summarize(mean(cases))
+```
+
+### Merging Data
+
+Often, for analysis it will make sense to combine data from different sources to allow for a greater scope to analysis. This process is called merging data. To merge a data set with another one they must be relational. This is done through matching keys: variables that uniquely identify observations. There are two types of keys:  
+
+* primary key: uniquely identifies an observation in the original own data frame
+* foreign key: uniquely identifies an observation in the data frame to merge
+
+Keys are not mutually exclusive; a variable can be a primary and foreign key. If a data frame lacks a primary key, you may need to make one. This can be done using `mutate()` and `row_number()`: `mutate(data, unique_key = row_number())`. This makes the row number into a variable uniquely identifying each observation. This is called a surrogate key.
+
+There are two common types of merges:
+
+* mutating joins: matches observations according to their keys and then adds new variables from the new data frame to the original one
+* filtering joins: filter observations from a data frame based on if they have a match in the second data frame
+
+There are other more advanced ways of merging data with complex filters that are not covered here. For information on those methods and a more complete explanation of this essential data science topic, refer to the R for Data Science chapter on [relational data](https://r4ds.had.co.nz/relational-data.html#mutating-joins). [@r4ds]
+
+There are two types of joins for mutating joins:
+
+* inner join - `inner_join(x, y, by = "key")`
+  + matches pairs of observations whenever their keys are equal 
+  + unmatched observations are not included in the result
+* outer join
+  + keeps all observations that appear in one or both of the data
+  + `left_join(x, y, by = "key")` keeps all of the observations in the original table
+  + `right_join(x, y, by = "key")` keeps all of the observations in the new table
+  + `full_join(x, y, by = "key")` keeps all observation in both tables
+
+Below, I use four fictional tables to demonstrate the mutating join functions discussed above.
+
+```{r}
+original <- tibble(key = c(1,2,3,4,5),
+                   data = c("a", "b", "c", "d", "e"),
+                   nums = c(100, 110, 120, 130, 140))
+  
+new <- tibble(new_key = c(2,3,4,6,7),
+              new_data = c(10,30,24,53,67))
+
+duplicate <- tibble(key = c(1,2,2,2,3,4,5),
+                    data = c("May", "Jul", "Nov", "Aug", "Jun", "Feb", "Dec"))
+
+multiple <- tibble(key = c(1,2,3,4,5),
+                   data = c("a", "b", "c", "d", "e"),
+                   values = c("Mon", "Tues", "Wed", "Thurs", "Fri"))
+```
+
+The first thing you may notice is that in `original` and `new`, the column that contains the key is not the same. To join these you can either first rename the key columns so they have the same name or use the syntax of the first example. This is demonstrated in the code chunk below.
+
+```{r}
+# the piping operator fills in the x data parameter
+original |> inner_join(new, by = c("key" = "new_key")) # syntax without renaming
+# keeps only matching observations
+new <- new |> rename(key = new_key)
+original |> left_join(new, by = "key") 
+# keeps all observations in original (x) data frame
+original |> right_join(new, by = "key") 
+# keeps all observations in new (y) data frame
+original |> full_join(new, by = "key") # keeps all observations in both
+# when there is not a corresponding observation in the match and the observation is kept, NA is used to fill it in as missing
+```
+
+If the `by = ` parameter is not specified, `by = NULL`. This means that the key will be all variables that the two data frames share in common. This is called a natural join. Most of the time it is good practice to specify the key or keys you want to use 
+
+The `duplicate` data frame and the code chunk below demonstrate what happens when there are multiple observations that correspond to the same key. Usually, only one of the data frames will contain observations with duplicate matching observations. If this is not the case, then it there most likely is an error in one of the data frames. 
+
+```{r}
+original |> inner_join(duplicate, by = "key")
+```
+
+When a variable is mutated in from the new (y) data frame that has the same name as one in the original (x) data frame, the variables are denoted `data.x` and `data.y`. This is demonstrated in the code chunk above. 
+
+Sometimes, one variable will not be able to uniquely identify observations as discussed previously. The `multiple` data frame and the code chunk below demonstrate the syntax of using multiple variables to identify observations.  
+
+```{r}
+original |> inner_join(multiple, by = c("key", "data"))
+```
 
 ## Saving Files
 
@@ -264,7 +393,7 @@ Saving data frames allows you to save a snapshot of the data as you are going th
 
 ### Saving Data Frames
 
-Saving data frames can be very useful to reference your dataset in the desired and clean format, as well as for saving summary tables of the data or your own custom tables for later display. For saving these types of files, I recommend saving them as RDS files, as they are the easiest for R to quickly read and then allow you to display the results in whatever format you wish. The code chunk below create a sample data frame called object to save as an RDS file and then uses the `saveRDS()` function to save the file. 
+Saving data frames can be very useful to reference your data set in the desired and clean format, as well as for saving summary tables of the data or your own custom tables for later display. For saving these types of files, I recommend saving them as RDS files, as they are the easiest for R to quickly read and then allow you to display the results in whatever format you wish. The code chunk below create a sample data frame called object to save as an RDS file and then uses the `saveRDS()` function to save the file. 
 
 ```{r}
 # This creates a sample data frame to save as an RDS file
@@ -282,32 +411,92 @@ To reload these files into R, or call them in another document, use the `readRDS
 ```{r}
 readRDS("file_name.rds")
 ```
+### Saving Other File Types
 
-### Saving Images
-
-THIS SECTION IS HAVING ISSUES: WHAT IS THE BEST WAY TO DO THIS?
-
-Images should be saved in the png format for easy display. This can be done easily using the png package. A png can be referenced in markdown using this format: `![alt text](figures/img.png)` This line should not be coded within a chunk, it should be part of the actual markdown document itself. The alt text is what you want to caption the image. The code chunk below shows how to save a png. To create something to save, I have graphed the sample tibble from the previous section. The data for this plot does not refer to anything so please don't use this as an example of how to make graphs This is a demonstration of how to save these for later reference. Subsequent sections will cover how to approach making graphs using the ggplot2 package and extensions.
-
-```{r}
-library(png)
-
-(image <- ggplot(data = object) + 
-  geom_point(mapping = aes(x = a, y = b)))
-
-#writePNG(image, target = "file_name.png")
-
-save(image, file = "file_name.png")
-```
+There are a variety of objects you may want to save in your code for later reference, either in a written work or another document. Graphs saved to images is other file format that is the most useful. That will be covered in the next chapter on data visualization. For other types of objects that you may want to save, look on the internet for the best file type and function to use to save them. Always check that the saved file is as you intended it to be and that it can be read into the format you desire. 
 
 ## Data Sources
 
-### IPUMS
+This section outlines refutable data sources that have a robust collection of variables. This makes them ideal for exploring your own interests in data analysis or for creating a project of your own. This is not a comprehensive list, but will allow you to access most data available on the internet and access a variety of refutable and significant economic variables. 
 
 ### Tidycensus
 
+Tidycensus is an R package that allows users to easily access census data and estimates. A complete explanation census data and how to use tidycensus with R is given [here](https://walker-data.com/census-r/index.html) in Kyle Walker's *Analyzing US Census Data: Methods, Maps, and Models in R*.[@census] Walker provides a comprehensive and updated review of how to use Census data with R. This is an example of an API (Application Programming Interface). APIs are amazing tools for getting access to underlying data on the internet from a wide variety of sources. For more information on APIs refer [this chapter](https://dcl-wrangle.stanford.edu/api-basics.html) from Stanford's *Data Wrangling*.[@stanford] 
+
+```{r}
+library(tidycensus)
+```
+
+Tidycensus is an example of a R package that is a wrapper for an API, making the process of obtaining data easier. The census has a variety of APIs available, but the ones most applicable to your work are:
+
+* Decennial Census
+  + Consists of the data from the survey sent to each U.S. household every 10 years, beginning in 1790 [@stanford]
+  + Until the 2000, the decennial census consisted of a short form, which every household filled out, and a long form, a long form version with additional questions received by 1 in 6 Americans[@census]
+  + Most accurate population data, but only available every 10 year
+    + useful if a census year lines up with the time frame of your data
+    + occurs in years ending in 0 (e.g 1990, 2000)
+* the American Community Survey (ACS)
+  + After 2000, the long form census became the ACS and was administered every year to a sample of 3.5 million households[@stanford]
+  + Consists of samples every year or every five years
+    + One year estimates are more current but have a larger margin of error, making five year estimates more valuable[@stanford]
+  + includes a wide variety of variables on social, economic, housing, and demographic aspects
+    + very good data on racial breakdown
+* the Population Estimates Program (PEP)
+  + Population estimates for non-decennial census years
+  + Uses more accurate techniques for population estimation than ACS population estimates[@stanford]
+  
+Before using Tidycensus you need to get a Census Bureau API key and activate it. This can be done by completing these steps one time:[@census]
+
+1. Request a key [here](https://api.census.gov/data/key_signup.html)
+  + You will receive an email with they key
+2. Run `census_api_key("YOUR KEY GOES HERE", install = TRUE)`
+  + replace `YOUR_KEY_GOES_HERE` with your Census key from step 1
+3. Restart R (*Ctrl/Cmd + Shift +F10*)
+
+After completing these steps, you will always have access to the Census Bureau API. 
+
+The first step is to select the variables you want using the `load_variables(year, dataset = )` function. The options for the `year` and `dataset` parameters are outlined below:
+
+- Decennial Census
+  + `dataset = `
+    + `"sf1"`:  short form census
+      + available for 2000 and 2010
+    + `"sf2"`: range of population and housing unit characteristics
+      + available for 2000 and 2010
+    + `"sf3"` and `"sf4"`: long form census data on detailed demographic information such as income and occupation
+      + available only for 1790 to 2000, every 10 years
+    + note portions of the 2020 census data is available 
+- ACS
+  + `dataset = `
+    + `"acs5"`: 5 year ACS
+      + `year` refers to the end-year of the sample period
+        + e.g. `year = 2019` refers to the 2015 through 2019 sample
+      + ACS end-years 2009 to 2019 supported
+    + `"acs1"`: 1 year ACS
+      + ACS end-years 2005 to 2021 supported
+- PEP
+
+The `load_variables()` function returns a tibble with three variables:
+
+- `name`: the variable code
+- `label`: a description of the variable
+- `concpet`: a broader categorization
+
+```{r}
+(vars <- load_variables(year = 2021, dataset = "acs1"))
+```
+
+This tibble allows you to select the desired variables within the selected data set. These variables are coded so it is important to make a list of the desired variables codes for retrieving the actual data. The sheer number of variables is overwhelming, so it is important to be able to narrow down to what you want through filtering. I have found the most success first filtering by concept and then looking at the individual label. It is easiest to view the data frame from the R environment and filter through the button in the top left of the window. The picture below shows the results of filtering for aggregate family income from the 1-year ACS data set from 2021.
+
+![](figures/census_filter.png)
+
+### IPUMS
+
+IPUMS is a collection of social and economic data readily available on the internet. Their data sets aggregate data across different US government agencies and international data sources, including census data, the National Science Foundation, the Bureau of Labor Statistics, the Center for Disease Control, and the Food and Drug Administration. They also offer international, health, and higher education focused data sets. To get data you select the variable and the sample (source and time) into a cart and download the data as a .csv file. This wonderful resource is available [here](https://www.ipums.org).
+
 ### Scraping
+
+Sometimes you are able to look at data on the internet, but it is not available for download. Scraping is the process by which you are able to access the data you can see through the html code of the website. Not all websites are able to be scraped easily, but many are. Scraping is a very useful skill in the world of data science. 
 
 ## Conclusion
 
-Extra? example of how to look up documentation

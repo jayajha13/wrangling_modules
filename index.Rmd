@@ -27,16 +27,16 @@ Before starting this guide, I recommend working through Professor Andy Field's [
 
 As you are working through your own work, it is impossible to remember all of the little things in 
 R markdown's syntax or relevant to the specific package you are working with. RStudio has made a bunch of very helpful cheat sheets that outline the basic needed to write effective documents in markdown and much more. Those can be accessed through the help menu as seen in the picture below:
-![alt text](figures/cheatsheets.png)
+![](figures/cheatsheets.png)
 You are also able to pull up a list of markdown syntax within RStudio itself. This will appear in the help panel in the bottom right of your RStudio:
-![alt text](figures/mkd_quickref.png)
+![](figures/mkd_quickref.png)
 
 Aside from these great resources you can always use the help tab to search for the documentation of a function. Happy coding!
 
 These are the packages needed for work in this book:
 
 * here
-  + great function for calling file names
+  + great package for referencing file names and paths
 * leanr 
   + enables tutorials
 * tidyverse
@@ -44,4 +44,6 @@ These are the packages needed for work in this book:
   + widely used and integrated with many other packages
 * knitr 
   + tidy table output in both html and pdf
+* tidycensus
+  + package for accessing US census data and estimates through their API
   

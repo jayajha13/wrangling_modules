@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data Wrangling Basic Guide</title>
+  <title>4 Data Vizualization | Data Wrangling Basic Guide</title>
   <meta name="description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data Wrangling Basic Guide" />
+  <meta property="og:title" content="4 Data Vizualization | Data Wrangling Basic Guide" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data Wrangling Basic Guide" />
+  <meta name="twitter:title" content="4 Data Vizualization | Data Wrangling Basic Guide" />
   
   <meta name="twitter:description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Max Ricciardelli" />
 
 
-<meta name="date" content="2023-06-29" />
+<meta name="date" content="2023-06-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="data.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -219,8 +219,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="data.html"><a href="data.html#data-sources"><i class="fa fa-check"></i><b>3.5</b> Data Sources</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="data.html"><a href="data.html#tidycensus"><i class="fa fa-check"></i><b>3.5.1</b> Tidycensus</a></li>
-<li class="chapter" data-level="3.5.2" data-path="data.html"><a href="data.html#ipums"><i class="fa fa-check"></i><b>3.5.2</b> IPUMS</a></li>
+<li class="chapter" data-level="3.5.1" data-path="data.html"><a href="data.html#ipums"><i class="fa fa-check"></i><b>3.5.1</b> IPUMS</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data.html"><a href="data.html#tidycensus"><i class="fa fa-check"></i><b>3.5.2</b> Tidycensus</a></li>
 <li class="chapter" data-level="3.5.3" data-path="data.html"><a href="data.html#scraping"><i class="fa fa-check"></i><b>3.5.3</b> Scraping</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="data.html"><a href="data.html#conclusion-1"><i class="fa fa-check"></i><b>3.6</b> Conclusion</a></li>
@@ -246,18 +246,63 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="data-vizualization" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Data Vizualization<a href="data-vizualization.html#data-vizualization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>GGplot2!</p>
+<div id="saving-images" class="section level3 hasAnchor" number="4.0.1">
+<h3><span class="header-section-number">4.0.1</span> Saving Images<a href="data-vizualization.html#saving-images" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>THIS SECTION IS HAVING ISSUES: WHAT IS THE BEST WAY TO DO THIS?</p>
+<p>Images should be saved in the png format for easy display. This can be done easily using the png package. A png can be referenced in markdown using this format: <code>![alt text](figures/img.png)</code> This line should not be coded within a chunk, it should be part of the actual markdown document itself. The alt text is what you want to caption the image. The code chunk below shows how to save a png. To create something to save, I have graphed the sample tibble from the previous section. The data for this plot does not refer to anything so please don’t use this as an example of how to make graphs This is a demonstration of how to save these for later reference. Subsequent sections will cover how to approach making graphs using the ggplot2 package and extensions.</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="data-vizualization.html#cb202-1" tabindex="-1"></a><span class="fu">library</span>(png)</span>
+<span id="cb202-2"><a href="data-vizualization.html#cb202-2" tabindex="-1"></a></span>
+<span id="cb202-3"><a href="data-vizualization.html#cb202-3" tabindex="-1"></a><span class="co">#(image &lt;- ggplot(data = object) + </span></span>
+<span id="cb202-4"><a href="data-vizualization.html#cb202-4" tabindex="-1"></a><span class="co">#  geom_point(mapping = aes(x = a, y = b)))</span></span>
+<span id="cb202-5"><a href="data-vizualization.html#cb202-5" tabindex="-1"></a></span>
+<span id="cb202-6"><a href="data-vizualization.html#cb202-6" tabindex="-1"></a><span class="co">#writePNG(image, target = &quot;file_name.png&quot;)</span></span>
+<span id="cb202-7"><a href="data-vizualization.html#cb202-7" tabindex="-1"></a></span>
+<span id="cb202-8"><a href="data-vizualization.html#cb202-8" tabindex="-1"></a><span class="co">#save(image, file = &quot;file_name.png&quot;)</span></span></code></pre></div>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+Altman, Sara, Bill Behrman, and Hadley Wickham. <em>Data Wrangling</em>. Stanford, 2021.
 </div>
+<div class="csl-entry">
+Field, Andy. <span>“Getting Started in r and RStudio,”</span> 2020. <a href="https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-overview">https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-overview</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garett Grolemund. <em>R for Data Science</em>. 2nd ed., 2023.
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-
+<a href="data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

@@ -1,0 +1,20 @@
+# Data Vizualization
+
+GGplot2!
+
+### Saving Images
+
+THIS SECTION IS HAVING ISSUES: WHAT IS THE BEST WAY TO DO THIS?
+
+Images should be saved in the png format for easy display. This can be done easily using the png package. A png can be referenced in markdown using this format: `![alt text](figures/img.png)` This line should not be coded within a chunk, it should be part of the actual markdown document itself. The alt text is what you want to caption the image. The code chunk below shows how to save a png. To create something to save, I have graphed the sample tibble from the previous section. The data for this plot does not refer to anything so please don't use this as an example of how to make graphs This is a demonstration of how to save these for later reference. Subsequent sections will cover how to approach making graphs using the ggplot2 package and extensions.
+
+```{r}
+library(png)
+
+#(image <- ggplot(data = object) + 
+#  geom_point(mapping = aes(x = a, y = b)))
+
+#writePNG(image, target = "file_name.png")
+
+#save(image, file = "file_name.png")
+```
