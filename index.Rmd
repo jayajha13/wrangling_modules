@@ -35,15 +35,17 @@ Aside from these great resources you can always use the help tab to search for t
 
 These are the packages needed for work in this book:
 
-* here
+* here[@R-here]
   + great package for referencing file names and paths
-* leanr 
+* leanr
   + enables tutorials
-* tidyverse
+* tidyverse[@R-tidyverse]
   + package for data manipulation and objects
   + widely used and integrated with many other packages
-* knitr 
+* knitr[@R-knitr]
   + tidy table output in both html and pdf
 * tidycensus
   + package for accessing US census data and estimates through their API
+* nycflights13
+  + sample data set for practice using the data visualization (ggplot2) and wrangling (dplyr) packages
   

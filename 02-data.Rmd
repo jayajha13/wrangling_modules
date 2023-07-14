@@ -301,6 +301,12 @@ table1 |> summarize(pop_mean = mean(population), mean(cases), count = n())
 # count shows the number of rows using the n() function
 ```
 
+The summary function is also useful for determining the number of unique values in a variable. This can come in handy when visualizing data. The code chunk below demonstrates this feature using the `unique()` function. 
+
+```{r}
+table1 |> summarize(unique(country))
+```
+
 ### Grouping Data
 
 When dealing with data that has categorical variables, it makes sense to analyze the data in context of each group. This can be done through the `group_by()` function. `group_by()` on its own does not have any affect. It must be combined with another function. Usually it is best used in on a categorical variable. The code chunk below demonstrates how it can be applied to countries in table1. When used in conjunction, it groups all observations with the same country and gives stats for that instead of the data in totality as shown above. 
@@ -442,7 +448,8 @@ Tidycensus is an example of a R package that is a wrapper for an API, making the
   + includes a wide variety of variables on social, economic, housing, and demographic aspects
     + very good data on racial breakdown
 * the Population Estimates Program (PEP)
-  + Population estimates for non-decennial census years
+  + Population estimates for non-decennial census years using decennial census data as well as birth, death, and migration rates[@census]
+  + Also allows access to indicator variables used in estimation
   + Uses more accurate techniques for population estimation than ACS population estimates[@stanford]
   
 Before using Tidycensus you need to get a Census Bureau API key and activate it. This can be done by completing these steps one time:[@census]
@@ -466,6 +473,7 @@ The first step is to select the variables you want using the `load_variables(yea
     + `"sf3"` and `"sf4"`: long form census data on detailed demographic information such as income and occupation
       + available only for 1790 to 2000, every 10 years
     + note portions of the 2020 census data is available 
+      + this is only available through `load_variables(year = 2020, dataset = "pl")`
 - ACS
   + `dataset = `
     + `"acs5"`: 5 year ACS
@@ -475,6 +483,10 @@ The first step is to select the variables you want using the `load_variables(yea
     + `"acs1"`: 1 year ACS
       + ACS end-years 2005 to 2021 supported
 - PEP
+  + the PEP estimates are no available through the `load_variables()` function
+  + instead you use the `get_estimates()` function
+    + the entire data set is far too large to download, so you must use parameters to download smaller subsets
+    + the use of this function is covered in the section below covering retrieving variables
 
 The `load_variables()` function returns a tibble with three variables:
 
@@ -483,20 +495,59 @@ The `load_variables()` function returns a tibble with three variables:
 - `concpet`: a broader categorization
 
 ```{r}
-(vars <- load_variables(year = 2021, dataset = "acs1"))
+load_variables(year = 2021, dataset = "acs1")
 ```
 
 This tibble allows you to select the desired variables within the selected data set. These variables are coded so it is important to make a list of the desired variables codes for retrieving the actual data. The sheer number of variables is overwhelming, so it is important to be able to narrow down to what you want through filtering. I have found the most success first filtering by concept and then looking at the individual label. It is easiest to view the data frame from the R environment and filter through the button in the top left of the window. The picture below shows the results of filtering for aggregate family income from the 1-year ACS data set from 2021.
 
 ![](figures/census_filter.png)
 
+After selecting the desired variables, copy down the variable codes shown in the name column. The best way to do this is to save them into a vector, as demonstrated below. This allows you to just reference that vector in the variables argument of the retrieval function. The function used to get the data depends on the type of data you want: 
+
+- decennial census 
+ + use `get_decennial(geography, variables = , year = )`
+  + `geography = ` refers to the geographical unit of each observation
+    + lowest level is `"tract"`, largest level is `"us"`
+    + a full list of the options is available [here](https://walker-data.com/census-r/an-introduction-to-tidycensus.html#geography-and-variables-in-tidycensus)[@census]
+  + `variables = ` refers to the variables to get
+  + `year = ` refers to the sample end-year
+- ACS 
+  + use `get_acs(geography, variables = , year = , survey =)`
+    + identical parameters are the same as above
+    + `survey = ` refers to the acs survey you want
+      + the default is `"acs5"`
+      + other option is `"acs1"`
+- PEP 
+  + use `get_estimates(geography = , product = , year = , breakdown = , breakdown_labels = )`
+    + identical parameters are the same as above
+    + `product = ` refers to the set of variables to get
+      + the options are `"population"`, `"components"`, `"housing"`, `"characteristics"`
+    + `breakdown = ` allows you to break down the variables by different categories
+      + the options are `"AGEGROUP"`, `"RACE"`, `"SEX"`, or `"HISP"`
+      + when using `breakdown = ` it is best to set `breakdown_labels = TRUE` so the breakdown differences are included 
+      
+In the code chunk below I demonstrate how to create a variable vector and retrieve the variables with the `get_acs()` function. 
+
+```{r}
+variables <- c("B19127_001", "B19128_001") # can put any number of variables in this vector
+get_acs(geography = "state", variables = variables, year = 2019, survey = "acs5")
+```
+One thing to note about the census data is that it often comes in a form where it needs to be pivoted. This can be an issue as when you pivoting, you lose the measure of error, denoted moe. 
+
 ### IPUMS
 
-IPUMS is a collection of social and economic data readily available on the internet. Their data sets aggregate data across different US government agencies and international data sources, including census data, the National Science Foundation, the Bureau of Labor Statistics, the Center for Disease Control, and the Food and Drug Administration. They also offer international, health, and higher education focused data sets. To get data you select the variable and the sample (source and time) into a cart and download the data as a .csv file. This wonderful resource is available [here](https://www.ipums.org).
+IPUMS is a collection of social and economic data readily available on the internet. Their data sets aggregate data across different US government agencies and international data sources, including census data, the National Science Foundation, the Bureau of Labor Statistics, the Center for Disease Control, and the Food and Drug Administration. They also offer international, health, and higher education focused data sets. This allows access to census data for years that are not available in the tidycensus package. To get data you select the variable and the sample (source and time) into a cart and download the data as a .csv file. This wonderful resource is available [here](https://www.ipums.org).
+
+### Google Trends 
+
+Google Trends is a website that allows you to access data on the number of times a term was searched on Google by region and time period. This data can be incredibly useful in regressions and can be indicative of what is on people's mind at a given time. [This link](https://dgarcia-eu.github.io/SocialDataScience/1_Introduction/017_gtrendsR/gtrendsR.html) provides a guide in how to access this data either in the format of a CSV or directly within R through the `gtrendsR` package.
 
 ### Scraping
 
 Sometimes you are able to look at data on the internet, but it is not available for download. Scraping is the process by which you are able to access the data you can see through the html code of the website. Not all websites are able to be scraped easily, but many are. Scraping is a very useful skill in the world of data science. 
 
+In R scraping can be done through the `rvest` package. This is covered extensively [here](https://dcl-wrangle.stanford.edu/rvest.html) in the Stanford Data Wrangling book.[@stanford] This is a very useful tool and can be considered an entire branch of data science. 
+
 ## Conclusion
 
+This chapter provides a comprehensive overview of data. By this point, using the skills above, you should be able to read almost any form of data into a data frame within R, manipulate and clean data, and get data off of the internet from tidycensus. These skills will give you a concrete foundation for statistical analysis and allow you to put data into the proper format in data frames for visualization. This book is meant to give a functional overview of these topics. Do not hesitate to look into [R for Data Science](https://r4ds.had.co.nz/index.html), [Stanford's Data Wrangling](https://dcl-wrangle.stanford.edu), and [Analyzing US Census Data](https://walker-data.com/census-r/index.html). These resources provide more in-depth explanations into these topics. 
