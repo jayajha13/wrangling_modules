@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Data Wrangling Basic Guide</title>
+  <title>Data Wrangling and Visualization Guide</title>
   <meta name="description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Data Wrangling Basic Guide" />
+  <meta property="og:title" content="Data Wrangling and Visualization Guide" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Wrangling Basic Guide" />
+  <meta name="twitter:title" content="Data Wrangling and Visualization Guide" />
   
   <meta name="twitter:description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Max Ricciardelli" />
 
 
-<meta name="date" content="2023-07-14" />
+<meta name="date" content="2023-07-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="r-and-programming-basics.html"/>
+<link rel="next" href="programming_basics.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,6 +54,70 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
@@ -95,102 +159,103 @@ div.csl-indent {
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html"><i class="fa fa-check"></i><b>2</b> R and Programming Basics</a>
+<li class="chapter" data-level="2" data-path="programming_basics.html"><a href="programming_basics.html"><i class="fa fa-check"></i><b>2</b> R and Programming Basics</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#packages-functions-file-structure-and-file-paths"><i class="fa fa-check"></i><b>2.1</b> Packages, Functions, File Structure, and File Paths</a>
+<li class="chapter" data-level="2.1" data-path="programming_basics.html"><a href="programming_basics.html#projects"><i class="fa fa-check"></i><b>2.1</b> Projects</a></li>
+<li class="chapter" data-level="2.2" data-path="programming_basics.html"><a href="programming_basics.html#packages_functions_files"><i class="fa fa-check"></i><b>2.2</b> Packages, Functions, File Structure, and File Paths</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#packages-and-functions"><i class="fa fa-check"></i><b>2.1.1</b> Packages and Functions</a></li>
-<li class="chapter" data-level="2.1.2" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#installing-and-referencing-packages"><i class="fa fa-check"></i><b>2.1.2</b> Installing and Referencing Packages</a></li>
-<li class="chapter" data-level="2.1.3" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#calling-functions"><i class="fa fa-check"></i><b>2.1.3</b> Calling Functions</a></li>
-<li class="chapter" data-level="2.1.4" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#changing-the-working-directory"><i class="fa fa-check"></i><b>2.1.4</b> Changing the Working Directory</a></li>
+<li class="chapter" data-level="2.2.1" data-path="programming_basics.html"><a href="programming_basics.html#packages_functions"><i class="fa fa-check"></i><b>2.2.1</b> Packages and Functions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="programming_basics.html"><a href="programming_basics.html#installing_packages"><i class="fa fa-check"></i><b>2.2.2</b> Installing and Referencing Packages</a></li>
+<li class="chapter" data-level="2.2.3" data-path="programming_basics.html"><a href="programming_basics.html#functions"><i class="fa fa-check"></i><b>2.2.3</b> Calling Functions</a></li>
+<li class="chapter" data-level="2.2.4" data-path="programming_basics.html"><a href="programming_basics.html#working_directory"><i class="fa fa-check"></i><b>2.2.4</b> Changing the Working Directory</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#objects-data-and-types"><i class="fa fa-check"></i><b>2.2</b> Objects, data, and types</a>
+<li class="chapter" data-level="2.3" data-path="programming_basics.html"><a href="programming_basics.html#data_types"><i class="fa fa-check"></i><b>2.3</b> Objects, data, and types</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#mathematical-operators"><i class="fa fa-check"></i><b>2.2.1</b> Mathematical Operators</a></li>
-<li class="chapter" data-level="2.2.2" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#objects"><i class="fa fa-check"></i><b>2.2.2</b> Objects</a></li>
+<li class="chapter" data-level="2.3.1" data-path="programming_basics.html"><a href="programming_basics.html#math"><i class="fa fa-check"></i><b>2.3.1</b> Mathematical Operators</a></li>
+<li class="chapter" data-level="2.3.2" data-path="programming_basics.html"><a href="programming_basics.html#objects"><i class="fa fa-check"></i><b>2.3.2</b> Objects</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#logical-operators"><i class="fa fa-check"></i><b>2.3</b> Logical Operators</a>
+<li class="chapter" data-level="2.4" data-path="programming_basics.html"><a href="programming_basics.html#logical_operators"><i class="fa fa-check"></i><b>2.4</b> Logical Operators</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#boolean-operators"><i class="fa fa-check"></i><b>2.3.1</b> Boolean Operators</a></li>
-<li class="chapter" data-level="2.3.2" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#numeric-operators"><i class="fa fa-check"></i><b>2.3.2</b> Numeric Operators</a></li>
+<li class="chapter" data-level="2.4.1" data-path="programming_basics.html"><a href="programming_basics.html#boolean_operators"><i class="fa fa-check"></i><b>2.4.1</b> Boolean Operators</a></li>
+<li class="chapter" data-level="2.4.2" data-path="programming_basics.html"><a href="programming_basics.html#numeric_operators"><i class="fa fa-check"></i><b>2.4.2</b> Numeric Operators</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#if-and-else-statements"><i class="fa fa-check"></i><b>2.4</b> If and Else Statements</a></li>
-<li class="chapter" data-level="2.5" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#for-and-while-loops"><i class="fa fa-check"></i><b>2.5</b> For and While loops</a>
+<li class="chapter" data-level="2.5" data-path="programming_basics.html"><a href="programming_basics.html#if_else"><i class="fa fa-check"></i><b>2.5</b> If Else Statements</a></li>
+<li class="chapter" data-level="2.6" data-path="programming_basics.html"><a href="programming_basics.html#for_while"><i class="fa fa-check"></i><b>2.6</b> For and While loops</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#for-loops"><i class="fa fa-check"></i><b>2.5.1</b> For Loops</a></li>
-<li class="chapter" data-level="2.5.2" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#while-loops"><i class="fa fa-check"></i><b>2.5.2</b> While Loops</a></li>
+<li class="chapter" data-level="2.6.1" data-path="programming_basics.html"><a href="programming_basics.html#for_loops"><i class="fa fa-check"></i><b>2.6.1</b> For Loops</a></li>
+<li class="chapter" data-level="2.6.2" data-path="programming_basics.html"><a href="programming_basics.html#while_loops"><i class="fa fa-check"></i><b>2.6.2</b> While Loops</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#writing-your-own-functions"><i class="fa fa-check"></i><b>2.6</b> Writing your own functions</a></li>
-<li class="chapter" data-level="2.7" data-path="r-and-programming-basics.html"><a href="r-and-programming-basics.html#additional-resources-for-learning-r"><i class="fa fa-check"></i><b>2.7</b> Additional Resources for Learning R</a></li>
+<li class="chapter" data-level="2.7" data-path="programming_basics.html"><a href="programming_basics.html#original_functions"><i class="fa fa-check"></i><b>2.7</b> Writing your own functions</a></li>
+<li class="chapter" data-level="2.8" data-path="programming_basics.html"><a href="programming_basics.html#add_resources"><i class="fa fa-check"></i><b>2.8</b> Additional Resources for Learning R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#data-frames"><i class="fa fa-check"></i><b>3.1</b> Data Frames</a>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#data_frames"><i class="fa fa-check"></i><b>3.1</b> Data Frames</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#date-time-objects"><i class="fa fa-check"></i><b>3.1.1</b> Date Time Objects</a></li>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#date_time"><i class="fa fa-check"></i><b>3.1.1</b> Date Time Objects</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#factors"><i class="fa fa-check"></i><b>3.1.2</b> Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#importing-data"><i class="fa fa-check"></i><b>3.2</b> Importing Data</a>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#importing"><i class="fa fa-check"></i><b>3.2</b> Importing Data</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="data.html"><a href="data.html#csv-files"><i class="fa fa-check"></i><b>3.2.1</b> .csv Files</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data.html"><a href="data.html#microsoft-excel-files"><i class="fa fa-check"></i><b>3.2.2</b> Microsoft Excel Files</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data.html"><a href="data.html#rds-files"><i class="fa fa-check"></i><b>3.2.3</b> RDS Files</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data.html"><a href="data.html#conclusion"><i class="fa fa-check"></i><b>3.2.4</b> Conclusion</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data.html"><a href="data.html#csv"><i class="fa fa-check"></i><b>3.2.1</b> .csv Files</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data.html"><a href="data.html#excel_import"><i class="fa fa-check"></i><b>3.2.2</b> Microsoft Excel Files</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data.html"><a href="data.html#rds"><i class="fa fa-check"></i><b>3.2.3</b> RDS Files</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data.html"><a href="data.html#import_conclusion"><i class="fa fa-check"></i><b>3.2.4</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#cleaning-data-and-the-tidyverse"><i class="fa fa-check"></i><b>3.3</b> Cleaning Data and the Tidyverse</a>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#cleaning_data"><i class="fa fa-check"></i><b>3.3</b> Cleaning Data and the Tidyverse</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="data.html"><a href="data.html#pivoting-data"><i class="fa fa-check"></i><b>3.3.1</b> Pivoting Data</a></li>
-<li class="chapter" data-level="3.3.2" data-path="data.html"><a href="data.html#creating-new-variables"><i class="fa fa-check"></i><b>3.3.2</b> Creating New Variables</a></li>
-<li class="chapter" data-level="3.3.3" data-path="data.html"><a href="data.html#selecting-columns"><i class="fa fa-check"></i><b>3.3.3</b> Selecting Columns</a></li>
-<li class="chapter" data-level="3.3.4" data-path="data.html"><a href="data.html#renaming-variables-and-piping"><i class="fa fa-check"></i><b>3.3.4</b> Renaming Variables and Piping</a></li>
-<li class="chapter" data-level="3.3.5" data-path="data.html"><a href="data.html#filtering-data"><i class="fa fa-check"></i><b>3.3.5</b> Filtering Data</a></li>
-<li class="chapter" data-level="3.3.6" data-path="data.html"><a href="data.html#summarizing-data"><i class="fa fa-check"></i><b>3.3.6</b> Summarizing Data</a></li>
-<li class="chapter" data-level="3.3.7" data-path="data.html"><a href="data.html#grouping-data"><i class="fa fa-check"></i><b>3.3.7</b> Grouping Data</a></li>
-<li class="chapter" data-level="3.3.8" data-path="data.html"><a href="data.html#merging-data"><i class="fa fa-check"></i><b>3.3.8</b> Merging Data</a></li>
+<li class="chapter" data-level="3.3.1" data-path="data.html"><a href="data.html#pivoting"><i class="fa fa-check"></i><b>3.3.1</b> Pivoting Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data.html"><a href="data.html#new_vars"><i class="fa fa-check"></i><b>3.3.2</b> Creating New Variables</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data.html"><a href="data.html#select"><i class="fa fa-check"></i><b>3.3.3</b> Selecting Columns</a></li>
+<li class="chapter" data-level="3.3.4" data-path="data.html"><a href="data.html#rename"><i class="fa fa-check"></i><b>3.3.4</b> Renaming Variables and Piping</a></li>
+<li class="chapter" data-level="3.3.5" data-path="data.html"><a href="data.html#filtering"><i class="fa fa-check"></i><b>3.3.5</b> Filtering Data</a></li>
+<li class="chapter" data-level="3.3.6" data-path="data.html"><a href="data.html#summarize"><i class="fa fa-check"></i><b>3.3.6</b> Summarizing Data</a></li>
+<li class="chapter" data-level="3.3.7" data-path="data.html"><a href="data.html#group_by"><i class="fa fa-check"></i><b>3.3.7</b> Grouping Data</a></li>
+<li class="chapter" data-level="3.3.8" data-path="data.html"><a href="data.html#merge"><i class="fa fa-check"></i><b>3.3.8</b> Merging Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#saving-files"><i class="fa fa-check"></i><b>3.4</b> Saving Files</a>
+<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#saving"><i class="fa fa-check"></i><b>3.4</b> Saving Files</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="data.html"><a href="data.html#saving-data-frames"><i class="fa fa-check"></i><b>3.4.1</b> Saving Data Frames</a></li>
-<li class="chapter" data-level="3.4.2" data-path="data.html"><a href="data.html#saving-other-file-types"><i class="fa fa-check"></i><b>3.4.2</b> Saving Other File Types</a></li>
+<li class="chapter" data-level="3.4.1" data-path="data.html"><a href="data.html#save_data_frames"><i class="fa fa-check"></i><b>3.4.1</b> Saving Data Frames</a></li>
+<li class="chapter" data-level="3.4.2" data-path="data.html"><a href="data.html#save_misc"><i class="fa fa-check"></i><b>3.4.2</b> Saving Other File Types</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="data.html"><a href="data.html#data-sources"><i class="fa fa-check"></i><b>3.5</b> Data Sources</a>
+<li class="chapter" data-level="3.5" data-path="data.html"><a href="data.html#data_sources"><i class="fa fa-check"></i><b>3.5</b> Data Sources</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="data.html"><a href="data.html#tidycensus"><i class="fa fa-check"></i><b>3.5.1</b> Tidycensus</a></li>
 <li class="chapter" data-level="3.5.2" data-path="data.html"><a href="data.html#ipums"><i class="fa fa-check"></i><b>3.5.2</b> IPUMS</a></li>
-<li class="chapter" data-level="3.5.3" data-path="data.html"><a href="data.html#google-trends"><i class="fa fa-check"></i><b>3.5.3</b> Google Trends</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data.html"><a href="data.html#gtrends"><i class="fa fa-check"></i><b>3.5.3</b> Google Trends</a></li>
 <li class="chapter" data-level="3.5.4" data-path="data.html"><a href="data.html#scraping"><i class="fa fa-check"></i><b>3.5.4</b> Scraping</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="data.html"><a href="data.html#conclusion-1"><i class="fa fa-check"></i><b>3.6</b> Conclusion</a></li>
+<li class="chapter" data-level="3.6" data-path="data.html"><a href="data.html#data_conclusion"><i class="fa fa-check"></i><b>3.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-vizualization.html"><a href="data-vizualization.html"><i class="fa fa-check"></i><b>4</b> Data Vizualization</a>
+<li class="chapter" data-level="4" data-path="data_viz.html"><a href="data_viz.html"><i class="fa fa-check"></i><b>4</b> Data Vizualization</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="data-vizualization.html"><a href="data-vizualization.html#the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.1</b> The Grammar of Graphics</a></li>
-<li class="chapter" data-level="4.2" data-path="data-vizualization.html"><a href="data-vizualization.html#aesthetics"><i class="fa fa-check"></i><b>4.2</b> Aesthetics</a>
+<li class="chapter" data-level="4.1" data-path="data_viz.html"><a href="data_viz.html#graphics_grammar"><i class="fa fa-check"></i><b>4.1</b> The Grammar of Graphics</a></li>
+<li class="chapter" data-level="4.2" data-path="data_viz.html"><a href="data_viz.html#aes"><i class="fa fa-check"></i><b>4.2</b> Aesthetics</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="data-vizualization.html"><a href="data-vizualization.html#color"><i class="fa fa-check"></i><b>4.2.1</b> Color</a></li>
-<li class="chapter" data-level="4.2.2" data-path="data-vizualization.html"><a href="data-vizualization.html#shape"><i class="fa fa-check"></i><b>4.2.2</b> Shape</a></li>
-<li class="chapter" data-level="4.2.3" data-path="data-vizualization.html"><a href="data-vizualization.html#size"><i class="fa fa-check"></i><b>4.2.3</b> Size</a></li>
-<li class="chapter" data-level="4.2.4" data-path="data-vizualization.html"><a href="data-vizualization.html#shading"><i class="fa fa-check"></i><b>4.2.4</b> Shading</a></li>
+<li class="chapter" data-level="4.2.1" data-path="data_viz.html"><a href="data_viz.html#color"><i class="fa fa-check"></i><b>4.2.1</b> Color</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data_viz.html"><a href="data_viz.html#shape"><i class="fa fa-check"></i><b>4.2.2</b> Shape</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data_viz.html"><a href="data_viz.html#size"><i class="fa fa-check"></i><b>4.2.3</b> Size</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data_viz.html"><a href="data_viz.html#shade"><i class="fa fa-check"></i><b>4.2.4</b> Shading</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="data-vizualization.html"><a href="data-vizualization.html#faceting"><i class="fa fa-check"></i><b>4.3</b> Faceting</a></li>
-<li class="chapter" data-level="4.4" data-path="data-vizualization.html"><a href="data-vizualization.html#geoms-types-of-plots"><i class="fa fa-check"></i><b>4.4</b> Geoms: Types of Plots</a>
+<li class="chapter" data-level="4.3" data-path="data_viz.html"><a href="data_viz.html#faceting"><i class="fa fa-check"></i><b>4.3</b> Faceting</a></li>
+<li class="chapter" data-level="4.4" data-path="data_viz.html"><a href="data_viz.html#geoms"><i class="fa fa-check"></i><b>4.4</b> Geoms: Types of Plots</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="data-vizualization.html"><a href="data-vizualization.html#scatter-plots"><i class="fa fa-check"></i><b>4.4.1</b> Scatter Plots</a></li>
-<li class="chapter" data-level="4.4.2" data-path="data-vizualization.html"><a href="data-vizualization.html#line-graphs"><i class="fa fa-check"></i><b>4.4.2</b> Line Graphs</a></li>
-<li class="chapter" data-level="4.4.3" data-path="data-vizualization.html"><a href="data-vizualization.html#histograms-and-frequency-polygons"><i class="fa fa-check"></i><b>4.4.3</b> Histograms and Frequency Polygons</a></li>
-<li class="chapter" data-level="4.4.4" data-path="data-vizualization.html"><a href="data-vizualization.html#box-plots"><i class="fa fa-check"></i><b>4.4.4</b> Box Plots</a></li>
-<li class="chapter" data-level="4.4.5" data-path="data-vizualization.html"><a href="data-vizualization.html#bar-charts"><i class="fa fa-check"></i><b>4.4.5</b> Bar Charts</a></li>
-<li class="chapter" data-level="4.4.6" data-path="data-vizualization.html"><a href="data-vizualization.html#additional-geom-layers"><i class="fa fa-check"></i><b>4.4.6</b> Additional Geom Layers</a></li>
+<li class="chapter" data-level="4.4.1" data-path="data_viz.html"><a href="data_viz.html#scatter"><i class="fa fa-check"></i><b>4.4.1</b> Scatter Plots</a></li>
+<li class="chapter" data-level="4.4.2" data-path="data_viz.html"><a href="data_viz.html#line"><i class="fa fa-check"></i><b>4.4.2</b> Line Graphs</a></li>
+<li class="chapter" data-level="4.4.3" data-path="data_viz.html"><a href="data_viz.html#histograms"><i class="fa fa-check"></i><b>4.4.3</b> Histograms and Frequency Polygons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="data_viz.html"><a href="data_viz.html#box_plots"><i class="fa fa-check"></i><b>4.4.4</b> Box Plots</a></li>
+<li class="chapter" data-level="4.4.5" data-path="data_viz.html"><a href="data_viz.html#bar_charts"><i class="fa fa-check"></i><b>4.4.5</b> Bar Charts</a></li>
+<li class="chapter" data-level="4.4.6" data-path="data_viz.html"><a href="data_viz.html#other_layers"><i class="fa fa-check"></i><b>4.4.6</b> Additional Geom Layers</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="data-vizualization.html"><a href="data-vizualization.html#modifying-data-and-axes"><i class="fa fa-check"></i><b>4.5</b> Modifying Data and Axes</a>
+<li class="chapter" data-level="4.5" data-path="data_viz.html"><a href="data_viz.html#custom_axes"><i class="fa fa-check"></i><b>4.5</b> Modifying Data and Axes</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="data-vizualization.html"><a href="data-vizualization.html#filtering"><i class="fa fa-check"></i><b>4.5.1</b> Filtering</a></li>
-<li class="chapter" data-level="4.5.2" data-path="data-vizualization.html"><a href="data-vizualization.html#xlim-and-ylim"><i class="fa fa-check"></i><b>4.5.2</b> <code>xlim()</code> and <code>ylim()</code></a></li>
+<li class="chapter" data-level="4.5.1" data-path="data_viz.html"><a href="data_viz.html#filter_plot"><i class="fa fa-check"></i><b>4.5.1</b> Filtering</a></li>
+<li class="chapter" data-level="4.5.2" data-path="data_viz.html"><a href="data_viz.html#x_and_y_lim"><i class="fa fa-check"></i><b>4.5.2</b> <code>xlim()</code> and <code>ylim()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="data-vizualization.html"><a href="data-vizualization.html#titles"><i class="fa fa-check"></i><b>4.6</b> Titles</a></li>
-<li class="chapter" data-level="4.7" data-path="data-vizualization.html"><a href="data-vizualization.html#plotting-time-series"><i class="fa fa-check"></i><b>4.7</b> Plotting Time Series</a></li>
-<li class="chapter" data-level="4.8" data-path="data-vizualization.html"><a href="data-vizualization.html#saving-and-showing-graphics"><i class="fa fa-check"></i><b>4.8</b> Saving and Showing Graphics</a></li>
-<li class="chapter" data-level="4.9" data-path="data-vizualization.html"><a href="data-vizualization.html#conclusion-2"><i class="fa fa-check"></i><b>4.9</b> Conclusion</a></li>
+<li class="chapter" data-level="4.6" data-path="data_viz.html"><a href="data_viz.html#titles"><i class="fa fa-check"></i><b>4.6</b> Titles</a></li>
+<li class="chapter" data-level="4.7" data-path="data_viz.html"><a href="data_viz.html#time_series_plot"><i class="fa fa-check"></i><b>4.7</b> Plotting Time Series</a></li>
+<li class="chapter" data-level="4.8" data-path="data_viz.html"><a href="data_viz.html#save_viz"><i class="fa fa-check"></i><b>4.8</b> Saving and Showing Graphics</a></li>
+<li class="chapter" data-level="4.9" data-path="data_viz.html"><a href="data_viz.html#data_viz_conclusion"><i class="fa fa-check"></i><b>4.9</b> Conclusion</a></li>
 </ul></li>
 </ul>
 
@@ -201,7 +266,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Wrangling Basic Guide</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Wrangling and Visualization Guide</a>
           </h1>
         </div>
 
@@ -210,60 +275,128 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Data Wrangling Basic Guide</h1>
+<h1 class="title">Data Wrangling and Visualization Guide</h1>
 <p class="author"><em>Max Ricciardelli</em></p>
-<p class="date"><em>2023-07-14</em></p>
+<p class="date"><em>2023-07-19</em></p>
 </div>
 <div id="intro" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Introduction<a href="index.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>These modules are here to present a succinct guide to using R, RStudio, and the R Markdown format for data manipulation, analysis, and visualization. This guide is meant for those who have little to no experience in R specifically or programming at all. My purpose in designing these modules is to provide a brief yet clear guide to learning the basics of these tools and how to apply them. Throughout, I will link resources to guides that provide more in-depth discussion and complete overview of the packages and code used. I have found a lot of value exploring these resources. Almost anything you could want to know about R is available on the internet. If you run into an issue, do not be hesitant to use forums such as <a href="https://stackoverflow.com">stack overflow</a>. Someone has most likely run into the same problem before. A simple google search will often do the trick. The best way to develop these skills is practice using R to create documents and do assignments. In my experience, I have found that R markdown offers more control of the documents that I am making and allows me to directly integrate the statistical work that I do with the assignments I submit. Aside from the wonderful PDF output features of R markdown (available through LATEX), R offers the ability to create web pages and publish in the html format on the internet. This format offers widgets, knits faster than the PDFs, and allows for user interaction with the data analysis if combined with R shiny to make dashboards. This entire guide was written in R using the bookdown package. These skills are very powerful and desirable in the professional world.</p>
-<p>Before starting this guide, I recommend working through Professor Andy Field’s <a href="https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-r-and-rstudio">guide</a>.<span class="citation"><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></span> I really like his recommendations for reorganizing the windows in R Studio to promote better workflow and how he highlights the ways to customize R Studio so it works best for you. Towards the end of the guide he covers topics that I will cover in more detail, outlining multiple methods. Most of the assignments you submit will be in the format of PDF, making it important that you download LATEX, the software used to produce these outputs. The different versions of this software for different computers can be found <a href="https://www.latex-project.org/get/">here</a>.</p>
-<p>As you are working through your own work, it is impossible to remember all of the little things in
-R markdown’s syntax or relevant to the specific package you are working with. RStudio has made a bunch of very helpful cheat sheets that outline the basic needed to write effective documents in markdown and much more. Those can be accessed through the help menu as seen in the picture below:
+<p>These modules are here to present a succinct guide to using R, RStudio, and R Markdown for data wrangling and visualization. This guide is meant for those who have little to no experience in programming. My purpose in designing these modules is to provide a brief yet clear guide to learning the basic theory of these tools and how to apply them in practice. Throughout this book, I will reference online resources that provide more in-depth discussion of the topics covered.</p>
+<p>The internet is full of helpful resources concerning R and RStudio. If you run into an issue, do not be hesitant to use forums such as <a href="https://stackoverflow.com">stack overflow</a>. Someone has most likely run into the same problem before. A simple Google search will often do the trick.</p>
+<p>Before starting this book, I recommend working through Professor Andy Field’s <a href="https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-r-and-rstudio">guide</a>.<span class="citation"><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></span> I use his recommendations for reorganizing the windows in R Studio to promote better workflow. Most of the assignments you submit will be as a PDF output, making it important that you download LATEX, the software used to produce these outputs. The different versions of LATEX can be found <a href="https://www.latex-project.org/get/">here</a>.</p>
+<p>As you are working, it can be very difficult to remember the finer points of R markdown’s syntax. RStudio has made a bunch of very helpful cheat sheets that provide examples of almost anything you might want to do.<span class="citation"><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></span> Those can be accessed through the help menu as demonstrated in the screenshot below:
 <img src="figures/cheatsheets.png" />
-You are also able to pull up a list of markdown syntax within RStudio itself. This will appear in the help panel in the bottom right of your RStudio:
+You are also able to pull up a list of markdown syntax within RStudio. This will appear in the help window of RStudio:
 <img src="figures/mkd_quickref.png" /></p>
-<p>Aside from these great resources you can always use the help tab to search for the documentation of a function. Happy coding!</p>
+<p>Additionally, you can always use the search bar in the top rights of the help window to search for the documentation of any function.</p>
 <p>These are the packages needed for work in this book:</p>
 <ul>
-<li>here<span class="citation"><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></span>
+<li><code>here</code><span class="citation"><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></span>
 <ul>
 <li>great package for referencing file names and paths</li>
 </ul></li>
-<li>leanr
+<li><code>leanr</code><span class="citation"><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></span>
 <ul>
-<li>enables tutorials</li>
+<li>enables tutorials in RStudio</li>
 </ul></li>
-<li>tidyverse<span class="citation"><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></span>
+<li><code>tidyverse</code><span class="citation"><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></span>
 <ul>
-<li>package for data manipulation and objects</li>
-<li>widely used and integrated with many other packages</li>
+<li>collection of integrated packages for data manipulation and visualization</li>
+<li>packages from tidyverse used in this book
+<ul>
+<li><code>dplyr</code>
+<ul>
+<li>package for data wrangling</li>
 </ul></li>
-<li>knitr<span class="citation"><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></span>
+<li><code>ggplot2</code>
+<ul>
+<li>package for data manipulation</li>
+</ul></li>
+<li><code>lubridate</code>
+<ul>
+<li>package for date time objects</li>
+</ul></li>
+<li><code>readr</code>
+<ul>
+<li>package for reading files</li>
+</ul></li>
+<li><code>tibble</code>
+<ul>
+<li>package for creating effective data frames</li>
+</ul></li>
+<li><code>forcats</code>
+<ul>
+<li>package for factor objects</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><code>knitr</code><span class="citation"><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></span>
 <ul>
 <li>tidy table output in both html and pdf</li>
 </ul></li>
-<li>tidycensus
+<li><code>tidycensus</code><span class="citation"><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></span>
 <ul>
 <li>package for accessing US census data and estimates through their API</li>
 </ul></li>
-<li>nycflights13
+<li><code>nycflights13</code><span class="citation"><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></span>
 <ul>
 <li>sample data set for practice using the data visualization (ggplot2) and wrangling (dplyr) packages</li>
 </ul></li>
+<li><code>readxl</code><span class="citation"><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></span>
+<ul>
+<li>allow for reading excel files directly into a data frame</li>
+</ul></li>
+<li><code>ipumsr</code><span class="citation"><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></span>
+<ul>
+<li>package for accessing IPUMS API</li>
+</ul></li>
+<li><code>gtrendsR</code><span class="citation"><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></span>
+<ul>
+<li>package for accessing the Google trends API</li>
+</ul></li>
+<li><code>rvest</code><span class="citation"><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></span>
+<ul>
+<li>package for web scraping</li>
+</ul></li>
 </ul>
+<p>Uncomment and run this code in your console to install all necessary packages for work in this book:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="co">#install.packages(&quot;tidyverse&quot;, here&quot;, &quot;learnr&quot;, &quot;tidyverse&quot;, &quot;knitr&quot;, &quot;tidycensus&quot;, &quot;nycflights13&quot;, &quot;readxl&quot;, &quot;ipumsr&quot;, &quot;gtrendsR&quot;, &quot;rvest&quot;)</span></span></code></pre></div>
 
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-learnr" class="csl-entry">
+Aden-Buie, Garrick, Barret Schloerke, JJ Allaire, and Alexander Rossell Hayes. <em>Learnr: Interactive Tutorials for r</em>, 2023. <a href="https://CRAN.R-project.org/package=learnr">https://CRAN.R-project.org/package=learnr</a>.
+</div>
+<div id="ref-R-rmarkdown" class="csl-entry">
+Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, et al. <em>Rmarkdown: Dynamic Documents for r</em>, 2023. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.
+</div>
 <div id="ref-andy_field" class="csl-entry">
 Field, Andy. <span>“Getting Started in r and RStudio,”</span> 2020. <a href="https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-overview">https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-overview</a>.
+</div>
+<div id="ref-R-ipumsr" class="csl-entry">
+Greg Freedman Ellis, and Derek Burk. <em>Ipumsr: Read IPUMS Extract Files</em>, 2022. <a href="https://CRAN.R-project.org/package=ipumsr">https://CRAN.R-project.org/package=ipumsr</a>.
+</div>
+<div id="ref-R-gtrendsR" class="csl-entry">
+Massicotte, Philippe, and Dirk Eddelbuettel. <em>gtrendsR: Perform and Display Google Trends Queries</em>, 2022. <a href="https://github.com/PMassicotte/gtrendsR">https://github.com/PMassicotte/gtrendsR</a>.
 </div>
 <div id="ref-R-here" class="csl-entry">
 Müller, Kirill. <em>Here: A Simpler Way to Find Your Files</em>, 2020. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
 </div>
+<div id="ref-R-tidycensus" class="csl-entry">
+Walker, Kyle, and Matt Herman. <em>Tidycensus: Load US Census Boundary and Attribute Data as Tidyverse and Sf-Ready Data Frames</em>, 2023. <a href="https://walker-data.com/tidycensus/">https://walker-data.com/tidycensus/</a>.
+</div>
+<div id="ref-R-nycflights13" class="csl-entry">
+Wickham, Hadley. <em>Nycflights13: Flights That Departed NYC in 2013</em>, 2021. <a href="https://github.com/hadley/nycflights13">https://github.com/hadley/nycflights13</a>.
+</div>
+<div id="ref-R-rvest" class="csl-entry">
+———. <em>Rvest: Easily Harvest (Scrape) Web Pages</em>, 2022. <a href="https://CRAN.R-project.org/package=rvest">https://CRAN.R-project.org/package=rvest</a>.
+</div>
 <div id="ref-R-tidyverse" class="csl-entry">
-Wickham, Hadley. <em>Tidyverse: Easily Install and Load the Tidyverse</em>, 2023. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
+———. <em>Tidyverse: Easily Install and Load the Tidyverse</em>, 2023. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
+</div>
+<div id="ref-R-readxl" class="csl-entry">
+Wickham, Hadley, and Jennifer Bryan. <em>Readxl: Read Excel Files</em>, 2023. <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a>.
 </div>
 <div id="ref-R-knitr" class="csl-entry">
 Xie, Yihui. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>, 2023. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
@@ -273,9 +406,17 @@ Xie, Yihui. <em>Knitr: A General-Purpose Package for Dynamic Report Generation i
 <hr />
 <ol start="1">
 <li id="fn1"><p><a href="#ref-andy_field">Field, <span>“Getting Started in r and RStudio”</span></a>.<a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><a href="#ref-R-here">Müller, <em>Here</em></a>.<a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p><a href="#ref-R-tidyverse">Wickham, <em>Tidyverse</em></a>.<a href="index.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p><a href="#ref-R-knitr">Xie, <em>Knitr</em></a>.<a href="index.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="#ref-R-rmarkdown">Allaire et al., <em>Rmarkdown</em></a>.<a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="#ref-R-here">Müller, <em>Here</em></a>.<a href="index.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p><a href="#ref-R-learnr">Aden-Buie et al., <em>Learnr</em></a>.<a href="index.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p><a href="#ref-R-tidyverse">Wickham, <em>Tidyverse</em></a>.<a href="index.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p><a href="#ref-R-knitr">Xie, <em>Knitr</em></a>.<a href="index.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p><a href="#ref-R-tidycensus">Walker and Herman, <em>Tidycensus</em></a>.<a href="index.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p><a href="#ref-R-nycflights13">Wickham, <em>Nycflights13</em></a>.<a href="index.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p><a href="#ref-R-readxl">Wickham and Bryan, <em>Readxl</em></a>.<a href="index.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p><a href="#ref-R-ipumsr">Greg Freedman Ellis and Derek Burk, <em>Ipumsr</em></a>.<a href="index.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p><a href="#ref-R-gtrendsR">Massicotte and Eddelbuettel, <em>gtrendsR</em></a>.<a href="index.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p><a href="#ref-R-rvest">Wickham, <em>Rvest</em></a>.<a href="index.html#fnref12" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -284,7 +425,7 @@ Xie, Yihui. <em>Knitr: A General-Purpose Package for Dynamic Report Generation i
         </div>
       </div>
 
-<a href="r-and-programming-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="programming_basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
