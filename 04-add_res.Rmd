@@ -1,0 +1,31 @@
+# Overview of Additional Resources {#add_res}
+
+Below is a list of all resources used in compiling this guide. They all have different strengths and provide useful insights in how to effectively use R. 
+
+[*R for Data Science*](https://r4ds.hadley.nz)[@r4ds]
+
+- seminal overview of how to use R
+- goes into further depth and provides many more examples and exercises on most topics covered
+
+[*Data Wrangling*](https://dcl-wrangle.stanford.edu)[@stanford]
+
+- good information on data wrangling, scraping, and interacting with APIs including tidycensus
+
+[*Analyzing US Census Data: Methods, Maps, and Models in R*](https://walker-data.com/census-r/index.html)[@census]
+
+- best information on using tidycensus and dealing with census data
+
+[*Statistical Inference via Data Science: A ModernDive into r and the Tidyverse*](https://moderndive.com)[@modern_dive]
+
+- great information linking statistical knowledge with the tidyverse
+- lots of information on how to produce effective visualizations
+
+[*Ggplot2: Elegant Graphics for Data Analysis*](https://ggplot2-book.org)[@ggplot2]
+
+- best book for in-depth information on all the possibilities available through ggplot2
+
+[bookdown.org](https://bookdown.org)
+
+- center for textbooks such as this one produced using the bookdown package
+- links to books on anything you might want to do using R
+

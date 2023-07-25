@@ -15,7 +15,7 @@ description: "This book is meant to provide a guide to those who have little to 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tidyverse', "here", "learnr", "tidycensus", "nycflights13", "readxl", "ipumsr", "gtrendsR", "rvest"), 'packages.bib')
+  .packages(), 'bookdown', 'knitr', 'gt', 'rmarkdown', 'tidyverse', "here", "learnr", "tidycensus", "nycflights13", "readxl", "ipumsr", "gtrendsR", "rvest", "stringr", "dplyr", "ggplot2", "lubridate", "readr", "tibble", "forcats"), 'packages.bib')
 ```
 
 # Introduction {#intro}
@@ -42,20 +42,22 @@ These are the packages needed for work in this book:
 * `tidyverse`[@R-tidyverse]
   + collection of integrated packages for data manipulation and visualization
   + packages from tidyverse used in this book
-    + `dplyr`
+    + `dplyr`[@R-dplyr]
       + package for data wrangling
-    + `ggplot2`
+    + `ggplot2`[@R-ggplot2]
       + package for data manipulation
-    + `lubridate`
+    + `lubridate`[@R-lubridate]
       + package for date time objects
-    + `readr` 
+    + `readr`[@R-readr]
       + package for reading files
-    + `tibble`
+    + `tibble`[@R-tibble]
       + package for creating effective data frames
-    + `forcats`
+    + `forcats`[@R-forcats]
       + package for factor objects
 * `knitr`[@R-knitr]
   + tidy table output in both html and pdf
+* `gt`[@R-gt]
+  + used to easily generate professional table outputs from data frames
 * `tidycensus`[@R-tidycensus]
   + package for accessing US census data and estimates through their API
 * `nycflights13`[@R-nycflights13]

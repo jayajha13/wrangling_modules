@@ -13,6 +13,12 @@ This is an example of a sample project I made to illustrate how to organize file
 
 The names of each folder or file must be easy to reference. To make sure that they are able to be referenced in your code, do not use capital letters or spaces, only lowercase letter and underscores. In computer science, this convention is called camel case.  File names should be consistent and clear to anyone who looks at your project. 
 
+## Code Chunks
+
+A code chunk is a section of code within a R markdown document. Each code chunk has settings to change how it interacts with the final document. By default, the code chunk will run the code and display both the code and output in the final document. When creating final products that generate professional output, often it will be best to change those settings by clicking the gear in the top left of the chunk. For visualizations, where the output is the only part you want in your final product, it is best to set the chunk to show output only. Otherwise, it is best in your final document to set the code to show nothing (run code), unless you are specifically talking about the code and need to reference it. 
+
+To avoid having to set each code chunk individually, you can do your coding and preliminary drafting in a rough document and then create a clean final document that references files created and saved from the messy document. This allows you to have a more robust record of your process and create a more refined final submission. 
+
 ## Packages, Functions, File Structure, and File Paths {#packages_functions_files}
 
 Andy Field does a good job covering the basics of calling files and the value of the `here()`function in his tutorial.[@andy_field] `here()` is a very useful tool in quickly referencing file names and folders without having to type out or copy and paste the name each time. 
@@ -307,8 +313,6 @@ add_ten(20, optional = 2) # if you use an optional parameter you must set it equ
 add_ten('abc') # this causes a missing value because you cannot add 10 to a non-numeric variable
 ```
 
-## Additional Resources for Learning R {#add_resources}
-
-Many of the concepts discussed in this chapter are briefly covered and meant more as a reference when dealing with the process of data wrangling and visualization, discussed in [Chapter 2](#data) and [Chapter 3](#data_viz). For further help with these topics I recommend consulting *R for Data Science* linked [here](https://r4ds.hadley.nz).[@r4ds] *R for Data Science* provides a complete explanation of the topics of this chapter. There are many other online, open-access books on a plethora of topics within R (e.g. bookdown, R markdown, ggplot2) available at [bookdown.org](https://bookdown.org). 
+## Tutorials {#learnr}
 
 Installing the `learnr` package will enable tutorials within R studio for a variety of useful things.[@R-learnr] You can access this in the environment window in RStudio. If you run into any problems using a function, the first step is to search for the documentation for that function. The documentation will outline all of the required parameters, optional parameters, and examples for how to use the function.

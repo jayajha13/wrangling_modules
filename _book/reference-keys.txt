@@ -132,3 +132,12 @@ x_and_y_lim
 time_series_plot
 save_viz
 data_viz_conclusion
+code-chunks
+referencing-values-within-a-data-frame
+reference-saved-values-in-markdown
+displaying-data-frames-in-markdown
+subsetting-data-frames
+b.22
+overview-of-additional-resources
+add_res
+learnr
