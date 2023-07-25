@@ -9,6 +9,7 @@ documentclass: book
 bibliography: [wrangling_modules.bib, packages.bib]
 csl: chicago-note-bibliography.csl
 link-citations: yes
+output_dir: "docs"
 description: "This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users."
 ---
 
@@ -18,7 +19,7 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'gt', 'rmarkdown', 'tidyverse', "here", "learnr", "tidycensus", "nycflights13", "readxl", "ipumsr", "gtrendsR", "rvest", "stringr", "dplyr", "ggplot2", "lubridate", "readr", "tibble", "forcats"), 'packages.bib')
 ```
 
-# Introduction {#intro}
+# Preface {-}
 
 These modules are here to present a succinct guide to using R, RStudio, and R Markdown for data wrangling and visualization. This guide is meant for those who have little to no experience in programming. My purpose in designing these modules is to provide a brief yet clear guide to learning the basic theory of these tools and how to apply them in practice. Throughout this book, I will reference online resources that provide more in-depth discussion of the topics covered.
 

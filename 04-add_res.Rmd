@@ -1,4 +1,4 @@
-# Overview of Additional Resources {#add_res}
+# Overview of Additional Resources {-}
 
 Below is a list of all resources used in compiling this guide. They all have different strengths and provide useful insights in how to effectively use R. 
 

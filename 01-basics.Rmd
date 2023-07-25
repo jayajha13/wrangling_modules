@@ -33,7 +33,7 @@ Packages are collections of code snippets called functions, usually focused arou
 
 The code snippets below shows how to install a package, call it using the `library()` function, and then use a function within a package. I have the installation code commented out as I already have the package installed. To denote a comment within code you put `#` before the comment, telling R not to run anything after the `#`. Comments are very important for labeling what you are doing in your code so others can understand what you are trying to do. 
 
-You only need to install a package once and it should be done in the console section instead of in a R markdown file or code chunk. Its important to use the exact syntax shown below. If you do not surround the name of the packages with quotation marks within the parentheses (either `" "`, or `' '`) it will not run. The double or single quotes indicates to R that the text inside is to be read as a string, not as code. The packages used in this book are outlined the end of the [introduction](#intro).
+You only need to install a package once and it should be done in the console section instead of in a R markdown file or code chunk. Its important to use the exact syntax shown below. If you do not surround the name of the packages with quotation marks within the parentheses (either `" "`, or `' '`) it will not run. The double or single quotes indicates to R that the text inside is to be read as a string, not as code. The packages used in this book are outlined the end of the preface.
 
 ```{r Install Packages}
 # install.packages("here")
