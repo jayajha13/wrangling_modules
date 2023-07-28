@@ -23,7 +23,7 @@
 <meta name="author" content="Max Ricciardelli" />
 
 
-<meta name="date" content="2023-07-25" />
+<meta name="date" content="2023-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -284,13 +284,13 @@ div.csl-indent {
 <h1><span class="header-section-number">2</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This chapter explains how to deal with different types of data within R, as well as how to clean, manipulate, and save data. When we are dealing with data we will be using the object of a data frame to save the data within the temporary memory of R itself (shown in the environment). This chapter uses the packages <code>dplyr</code>, <code>forcats</code>, <code>tibble</code>, <code>readr</code>, and <code>lubridate</code>, which are all contained within the tidyverse. Additional packages outside of the tidyverse and mentioned as they are used. The installation and calling of the <code>tidyverse</code> is demonstrated in the code chunk below:</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="data.html#cb89-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching core tidyverse packages ────────────────────────────────────────── tidyverse 2.0.0 ──
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.1     ✔ readr     2.1.4
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
 ## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
 ## ✔ purrr     1.0.1     
-## ── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
@@ -347,24 +347,24 @@ div.csl-indent {
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="data.html#cb103-1" tabindex="-1"></a><span class="co"># this function can also read full text and abbreviations</span></span></code></pre></div>
 <p>One of the other really useful parts of lubridate date/time objects is the ability to refer to different components of a date time object. If you have a complete date time object, <code>year(date_time)</code> returns the year, <code>month(date_time)</code> returns the month, <code>mday(date_time)</code> returns the day of the month, <code>wday(date_time)</code> returns the day of the week, and the same for <code>hour(date_time)</code>, <code>minute(date_time)</code>, and <code>second(date_time)</code>. This will be used further in <a href="data_viz.html#data_viz">Chapter 3</a> in conjunction with visualizing time series.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="data.html#cb104-1" tabindex="-1"></a>(today <span class="ot">&lt;-</span> <span class="fu">now</span>())</span></code></pre></div>
-<pre><code>## [1] &quot;2023-07-25 14:47:07 CEST&quot;</code></pre>
+<pre><code>## [1] &quot;2023-07-28 12:10:51 EDT&quot;</code></pre>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="data.html#cb106-1" tabindex="-1"></a><span class="fu">year</span>(today)</span></code></pre></div>
 <pre><code>## [1] 2023</code></pre>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="data.html#cb108-1" tabindex="-1"></a><span class="fu">month</span>(today)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="data.html#cb110-1" tabindex="-1"></a><span class="fu">mday</span>(today)</span></code></pre></div>
-<pre><code>## [1] 25</code></pre>
+<pre><code>## [1] 28</code></pre>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="data.html#cb112-1" tabindex="-1"></a><span class="fu">wday</span>(today)</span></code></pre></div>
-<pre><code>## [1] 3</code></pre>
+<pre><code>## [1] 6</code></pre>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data.html#cb114-1" tabindex="-1"></a><span class="fu">wday</span>(today, <span class="at">label=</span><span class="cn">TRUE</span>) <span class="co"># this returns a factor ordering the days of the week properly</span></span></code></pre></div>
-<pre><code>## [1] Tue
+<pre><code>## [1] Fri
 ## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data.html#cb116-1" tabindex="-1"></a><span class="fu">hour</span>(today)</span></code></pre></div>
-<pre><code>## [1] 14</code></pre>
+<pre><code>## [1] 12</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data.html#cb118-1" tabindex="-1"></a><span class="fu">minute</span>(today)</span></code></pre></div>
-<pre><code>## [1] 47</code></pre>
+<pre><code>## [1] 10</code></pre>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data.html#cb120-1" tabindex="-1"></a><span class="fu">second</span>(today)</span></code></pre></div>
-<pre><code>## [1] 7.269173</code></pre>
+<pre><code>## [1] 51.14917</code></pre>
 <p>For more in-depth information and examples concerning lubridate refer to the <a href="https://r4ds.had.co.nz/dates-and-times.html">Dates and Times chapter</a> of <em>R for Data Science</em>.<span class="citation"><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a></span> Additionally, looking at the documentation of the package is always helpful.</p>
 </div>
 <div id="factors" class="section level3 hasAnchor" number="2.1.2">
@@ -1455,7 +1455,7 @@ div.csl-indent {
 <p>Most often, data you encounter will be available in the .csv format (comma-separated-values). The <code>readr</code> package in the tidyverse provides the function, <code>read_csv()</code> for reading .csv files into a data frame. An example of how to use the <code>read_csv()</code> function is given in the chunk below:</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="data.html#cb144-1" tabindex="-1"></a>(data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;sample.csv&quot;</span>)))</span></code></pre></div>
 <pre><code>## Rows: 156 Columns: 2
-## ── Column specification ──────────────────────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): Date
 ## dbl (1): Sales
