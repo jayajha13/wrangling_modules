@@ -1,0 +1,7 @@
+book_filename: "wrangling_modules"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
+split_bib: FALSE
+output_dir: "docs"

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Data Wrangling and Visualization Guide</title>
+  <title>References | Data Wrangling and Visualization Guide</title>
   <meta name="description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Data Wrangling and Visualization Guide" />
+  <meta property="og:title" content="References | Data Wrangling and Visualization Guide" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Wrangling and Visualization Guide" />
+  <meta name="twitter:title" content="References | Data Wrangling and Visualization Guide" />
   
   <meta name="twitter:description" content="This book is meant to provide a guide to those who have little to no experience in R and R studio to conceptions dealing with data and statistics. R is a powerful tool allowing highly customizable data visualization and offers many different formats and applications to users." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="overview-of-additional-resources.html"/>
 
-<link rel="next" href="programming_basics.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -281,190 +281,182 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Wrangling and Visualization Guide</h1>
-<p class="author"><em>Max Ricciardelli</em></p>
-<p class="date"><em>2023-08-25</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered hasAnchor">
-<h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>These modules are here to present a succinct guide to using R, RStudio, and R Markdown for data wrangling and visualization. This guide is meant for those who have little to no experience in programming. My purpose in designing these modules is to provide a brief yet clear guide to learning the basic theory of these tools and how to apply them in practice. Throughout this book, I will reference online resources that provide more in-depth discussion of the topics covered.</p>
-<p>The internet is full of helpful resources concerning R and RStudio. If you run into an issue, do not be hesitant to use forums such as <a href="https://stackoverflow.com">stack overflow</a>. Someone has most likely run into the same problem before. A simple Google search will often do the trick.</p>
-<p>Before starting this book, I recommend working through Professor Andy Field’s <a href="https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-installing-r-and-rstudio">guide</a>.<span class="citation"><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></span> I use his recommendations for reorganizing the windows in R Studio to promote better workflow. Most of the assignments you submit will be as a PDF output, making it important that you download LATEX, the software used to produce these outputs. The different versions of LATEX can be found <a href="https://www.latex-project.org/get/">here</a>.</p>
-<p>As you are working, it can be very difficult to remember the finer points of R markdown’s syntax. RStudio has made a bunch of very helpful cheat sheets that provide examples of almost anything you might want to do.<span class="citation"><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></span> Those can be accessed through the help menu as demonstrated in the screenshot below:
-<img src="figures/cheatsheets.png" />
-You are also able to pull up a list of markdown syntax within RStudio. This will appear in the help window of RStudio:
-<img src="figures/mkd_quickref.png" /></p>
-<p>Additionally, you can always use the search bar in the top rights of the help window to search for the documentation of any function.</p>
-<p>These are the packages needed for work in this book:</p>
-<ul>
-<li><code>here</code><span class="citation"><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></span>
-<ul>
-<li>great package for referencing file names and paths</li>
-</ul></li>
-<li><code>leanr</code><span class="citation"><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></span>
-<ul>
-<li>enables tutorials in RStudio</li>
-</ul></li>
-<li><code>tidyverse</code><span class="citation"><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></span>
-<ul>
-<li>collection of integrated packages for data manipulation and visualization</li>
-<li>packages from tidyverse used in this book
-<ul>
-<li><code>dplyr</code><span class="citation"><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></span>
-<ul>
-<li>package for data wrangling</li>
-</ul></li>
-<li><code>ggplot2</code><span class="citation"><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></span>
-<ul>
-<li>package for data manipulation</li>
-</ul></li>
-<li><code>lubridate</code><span class="citation"><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></span>
-<ul>
-<li>package for date time objects</li>
-</ul></li>
-<li><code>readr</code><span class="citation"><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></span>
-<ul>
-<li>package for reading files</li>
-</ul></li>
-<li><code>tibble</code><span class="citation"><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></span>
-<ul>
-<li>package for creating effective data frames</li>
-</ul></li>
-<li><code>forcats</code><span class="citation"><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></span>
-<ul>
-<li>package for factor objects</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><code>knitr</code><span class="citation"><a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></span>
-<ul>
-<li>tidy table output in both html and pdf</li>
-</ul></li>
-<li><code>gt</code><span class="citation"><a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></span>
-<ul>
-<li>used to easily generate professional table outputs from data frames</li>
-</ul></li>
-<li><code>tidycensus</code><span class="citation"><a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></span>
-<ul>
-<li>package for accessing US census data and estimates through their API</li>
-</ul></li>
-<li><code>nycflights13</code><span class="citation"><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></span>
-<ul>
-<li>sample data set for practice using the data visualization (ggplot2) and wrangling (dplyr) packages</li>
-</ul></li>
-<li><code>readxl</code><span class="citation"><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></span>
-<ul>
-<li>allow for reading excel files directly into a data frame</li>
-</ul></li>
-<li><code>ipumsr</code><span class="citation"><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></span>
-<ul>
-<li>package for accessing IPUMS API</li>
-</ul></li>
-<li><code>gtrendsR</code><span class="citation"><a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></span>
-<ul>
-<li>package for accessing the Google trends API</li>
-</ul></li>
-<li><code>rvest</code><span class="citation"><a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></span>
-<ul>
-<li>package for web scraping</li>
-</ul></li>
-</ul>
-<p>Uncomment and run this code in your console to install all necessary packages for work in this book:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="co">#install.packages(&quot;tidyverse&quot;, here&quot;, &quot;learnr&quot;, &quot;tidyverse&quot;, &quot;knitr&quot;, &quot;tidycensus&quot;, &quot;nycflights13&quot;, &quot;readxl&quot;, &quot;ipumsr&quot;, &quot;gtrendsR&quot;, &quot;rvest&quot;)</span></span></code></pre></div>
+<div id="references" class="section level1 unnumbered hasAnchor">
+<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-R-learnr" class="csl-entry">
+<div class="csl-entry">
 Aden-Buie, Garrick, Barret Schloerke, JJ Allaire, and Alexander Rossell Hayes. <em>Learnr: Interactive Tutorials for r</em>, 2023. <a href="https://CRAN.R-project.org/package=learnr">https://CRAN.R-project.org/package=learnr</a>.
 </div>
-<div id="ref-R-rmarkdown" class="csl-entry">
+<div class="csl-entry">
 Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, et al. <em>Rmarkdown: Dynamic Documents for r</em>, 2023. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.
 </div>
-<div id="ref-andy_field" class="csl-entry">
+<div class="csl-entry">
+Altman, Sara, Bill Behrman, and Hadley Wickham. <em>Data Wrangling</em>. Stanford, 2021.
+</div>
+<div class="csl-entry">
 Field, Andy. <span>“Getting Started in r and RStudio,”</span> 2020. <a href="https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-overview">https://milton-the-cat.rocks/learnr/r/r_getting_started/#section-overview</a>.
 </div>
-<div id="ref-R-ipumsr" class="csl-entry">
+<div class="csl-entry">
 Greg Freedman Ellis, Derek Burk, and Finn Roberts. <em>Ipumsr: An r Interface for Downloading, Reading, and Handling IPUMS Data</em>, 2023. <a href="https://CRAN.R-project.org/package=ipumsr">https://CRAN.R-project.org/package=ipumsr</a>.
 </div>
-<div id="ref-R-gt" class="csl-entry">
+<div class="csl-entry">
 Iannone, Richard, Joe Cheng, Barret Schloerke, Ellis Hughes, Alexandra Lauer, and JooYoung Seo. <em>Gt: Easily Create Presentation-Ready Display Tables</em>, 2023. <a href="https://CRAN.R-project.org/package=gt">https://CRAN.R-project.org/package=gt</a>.
 </div>
-<div id="ref-R-gtrendsR" class="csl-entry">
+<div class="csl-entry">
+Ismay, Chester, and Albert Y. Kim. <em>Statistical Inference via Data Science: A ModernDive into r and the Tidyverse</em>, 2023.
+</div>
+<div class="csl-entry">
 Massicotte, Philippe, and Dirk Eddelbuettel. <em>gtrendsR: Perform and Display Google Trends Queries</em>, 2022. <a href="https://github.com/PMassicotte/gtrendsR">https://github.com/PMassicotte/gtrendsR</a>.
 </div>
-<div id="ref-R-here" class="csl-entry">
+<div class="csl-entry">
+Montgomery, Douglas C, Cheryl L. Jennings, and Murat Kulahci. <em>Introduction to Time Series Analysis and Forecasting</em>. Edited by Second. Hoboken, New Jersey: John Wiley &amp; Sons, 2016.
+</div>
+<div class="csl-entry">
 Müller, Kirill. <em>Here: A Simpler Way to Find Your Files</em>, 2020. <a href="https://CRAN.R-project.org/package=here">https://CRAN.R-project.org/package=here</a>.
 </div>
-<div id="ref-R-tibble" class="csl-entry">
+<div class="csl-entry">
 Müller, Kirill, and Hadley Wickham. <em>Tibble: Simple Data Frames</em>, 2023. <a href="https://CRAN.R-project.org/package=tibble">https://CRAN.R-project.org/package=tibble</a>.
 </div>
-<div id="ref-R-lubridate" class="csl-entry">
+<div class="csl-entry">
 Spinu, Vitalie, Garrett Grolemund, and Hadley Wickham. <em>Lubridate: Make Dealing with Dates a Little Easier</em>, 2023. <a href="https://CRAN.R-project.org/package=lubridate">https://CRAN.R-project.org/package=lubridate</a>.
 </div>
-<div id="ref-R-tidycensus" class="csl-entry">
+<div class="csl-entry">
+Walker, Kyle. <em>Analyzing US Census Data: Methods, Maps, and Models in r</em>. CRC Press, 2023.
+</div>
+<div class="csl-entry">
 Walker, Kyle, and Matt Herman. <em>Tidycensus: Load US Census Boundary and Attribute Data as Tidyverse and Sf-Ready Data Frames</em>, 2023. <a href="https://walker-data.com/tidycensus/">https://walker-data.com/tidycensus/</a>.
 </div>
-<div id="ref-R-forcats" class="csl-entry">
+<div class="csl-entry">
 Wickham, Hadley. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>, 2023. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.
 </div>
-<div id="ref-R-nycflights13" class="csl-entry">
+<div class="csl-entry">
 ———. <em>Nycflights13: Flights That Departed NYC in 2013</em>, 2021. <a href="https://github.com/hadley/nycflights13">https://github.com/hadley/nycflights13</a>.
 </div>
-<div id="ref-R-rvest" class="csl-entry">
+<div class="csl-entry">
 ———. <em>Rvest: Easily Harvest (Scrape) Web Pages</em>, 2022. <a href="https://CRAN.R-project.org/package=rvest">https://CRAN.R-project.org/package=rvest</a>.
 </div>
-<div id="ref-R-tidyverse" class="csl-entry">
+<div class="csl-entry">
+———. <em>Stringr: Simple, Consistent Wrappers for Common String Operations</em>, 2022. <a href="https://CRAN.R-project.org/package=stringr">https://CRAN.R-project.org/package=stringr</a>.
+</div>
+<div class="csl-entry">
 ———. <em>Tidyverse: Easily Install and Load the Tidyverse</em>, 2023. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
 </div>
-<div id="ref-R-readxl" class="csl-entry">
+<div class="csl-entry">
 Wickham, Hadley, and Jennifer Bryan. <em>Readxl: Read Excel Files</em>, 2023. <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a>.
 </div>
-<div id="ref-R-ggplot2" class="csl-entry">
+<div class="csl-entry">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garett Grolemund. <em>R for Data Science</em>. 2nd ed., 2023.
+</div>
+<div class="csl-entry">
 Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and Dewey Dunnington. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>, 2023. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
 </div>
-<div id="ref-R-dplyr" class="csl-entry">
+<div class="csl-entry">
 Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis Vaughan. <em>Dplyr: A Grammar of Data Manipulation</em>, 2023. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.
 </div>
-<div id="ref-R-readr" class="csl-entry">
+<div class="csl-entry">
 Wickham, Hadley, Jim Hester, and Jennifer Bryan. <em>Readr: Read Rectangular Text Data</em>, 2023. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.
 </div>
-<div id="ref-R-knitr" class="csl-entry">
+<div class="csl-entry">
+Wickham, Hadley, Danielle Navarro, and Thomas Lin. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. 3rd ed. Springer, 2023.
+</div>
+<div class="csl-entry">
 Xie, Yihui. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>, 2023. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p><a href="#ref-andy_field">Field, <span>“Getting Started in r and RStudio”</span></a>.<a href="index.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p><a href="#ref-R-rmarkdown">Allaire et al., <em>Rmarkdown</em></a>.<a href="index.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p><a href="#ref-R-here">Müller, <em>Here</em></a>.<a href="index.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p><a href="#ref-R-learnr">Aden-Buie et al., <em>Learnr</em></a>.<a href="index.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p><a href="#ref-R-tidyverse">Wickham, <em>Tidyverse</em></a>.<a href="index.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p><a href="#ref-R-dplyr">Wickham et al., <em>Dplyr</em></a>.<a href="index.html#fnref6" class="footnote-back">↩︎</a></p></li>
-<li id="fn7"><p><a href="#ref-R-ggplot2">Wickham et al., <em>Ggplot2</em></a>.<a href="index.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p><a href="#ref-R-lubridate">Spinu, Grolemund, and Wickham, <em>Lubridate</em></a>.<a href="index.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p><a href="#ref-R-readr">Wickham, Hester, and Bryan, <em>Readr</em></a>.<a href="index.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p><a href="#ref-R-tibble">Müller and Wickham, <em>Tibble</em></a>.<a href="index.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p><a href="#ref-R-forcats">Wickham, <em>Forcats</em></a>.<a href="index.html#fnref11" class="footnote-back">↩︎</a></p></li>
-<li id="fn12"><p><a href="#ref-R-knitr">Xie, <em>Knitr</em></a>.<a href="index.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p><a href="#ref-R-gt">Iannone et al., <em>Gt</em></a>.<a href="index.html#fnref13" class="footnote-back">↩︎</a></p></li>
-<li id="fn14"><p><a href="#ref-R-tidycensus">Walker and Herman, <em>Tidycensus</em></a>.<a href="index.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p><a href="#ref-R-nycflights13">Wickham, <em>Nycflights13</em></a>.<a href="index.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p><a href="#ref-R-readxl">Wickham and Bryan, <em>Readxl</em></a>.<a href="index.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p><a href="#ref-R-ipumsr">Greg Freedman Ellis, Derek Burk, and Finn Roberts, <em>Ipumsr</em></a>.<a href="index.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p><a href="#ref-R-gtrendsR">Massicotte and Eddelbuettel, <em>gtrendsR</em></a>.<a href="index.html#fnref18" class="footnote-back">↩︎</a></p></li>
-<li id="fn19"><p><a href="#ref-R-rvest">Wickham, <em>Rvest</em></a>.<a href="index.html#fnref19" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
+<a href="overview-of-additional-resources.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="programming_basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
